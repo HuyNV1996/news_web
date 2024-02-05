@@ -1,0 +1,125 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+    <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
+    <UserSecretsId>2ffeecca-6aa8-41d9-8503-81c0cdcd6adc</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="17.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
+    <PackageReference Include="Piranha" Version="10.3.0" />
+    <PackageReference Include="Piranha.AspNetCore" Version="10.3.0" />
+    <PackageReference Include="Piranha.AspNetCore.Identity.MySQL" Version="10.3.0" />
+    <PackageReference Include="Piranha.AspNetCore.Identity.SQLServer" Version="10.3.0" />
+    <PackageReference Include="Piranha.AttributeBuilder" Version="10.3.0" />
+    <PackageReference Include="Piranha.Data.EF.MySql" Version="10.3.0" />
+    <PackageReference Include="Piranha.Data.EF.SQLServer" Version="10.3.0" />
+    <PackageReference Include="Piranha.ImageSharp" Version="10.3.0" />
+    <PackageReference Include="Piranha.Local.FileStorage" Version="10.3.0" />
+    <PackageReference Include="Piranha.Manager" Version="10.3.0" />
+    <PackageReference Include="Piranha.Manager.LocalAuth" Version="10.3.0" />
+    <PackageReference Include="Piranha.Manager.TinyMCE" Version="10.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\css\common.css" />
+    <None Include="wwwroot\assets\css\huy.css" />
+    <None Include="wwwroot\assets\css\ngoc.css" />
+    <None Include="wwwroot\assets\css\responsive.css" />
+    <None Include="wwwroot\assets\css\responsiveHuy.css" />
+    <None Include="wwwroot\assets\icon\arrow-down-s-line.svg" />
+    <None Include="wwwroot\assets\icon\arrow-left-line.svg" />
+    <None Include="wwwroot\assets\icon\arrow-right-line.svg" />
+    <None Include="wwwroot\assets\icon\arrow-right-s-line.svg" />
+    <None Include="wwwroot\assets\icon\arrow-up-line.svg" />
+    <None Include="wwwroot\assets\icon\Button.svg" />
+    <None Include="wwwroot\assets\icon\calendar-svg.svg" />
+    <None Include="wwwroot\assets\icon\call.svg" />
+    <None Include="wwwroot\assets\icon\close-fill.svg" />
+    <None Include="wwwroot\assets\icon\facebook-box-fill.svg" />
+    <None Include="wwwroot\assets\icon\facebook.svg" />
+    <None Include="wwwroot\assets\icon\headphone-fill.svg" />
+    <None Include="wwwroot\assets\icon\instagram.svg" />
+    <None Include="wwwroot\assets\icon\linkedin-fill.svg" />
+    <None Include="wwwroot\assets\icon\location-svg.svg" />
+    <None Include="wwwroot\assets\icon\location.svg" />
+    <None Include="wwwroot\assets\icon\mail-fill.svg" />
+    <None Include="wwwroot\assets\icon\mail-line.svg" />
+    <None Include="wwwroot\assets\icon\menu-2-line.svg" />
+    <None Include="wwwroot\assets\icon\phone-line.svg" />
+    <None Include="wwwroot\assets\icon\printer-line.svg" />
+    <None Include="wwwroot\assets\icon\Social Icons.svg" />
+    <None Include="wwwroot\assets\icon\user-svg.svg" />
+    <None Include="wwwroot\assets\icon\Vector.svg" />
+    <None Include="wwwroot\assets\icon\zalo.svg" />
+    <None Include="wwwroot\assets\icon\_Play button.svg" />
+    <None Include="wwwroot\assets\img\324244179_2091682811025155_2745277745492359431_n 1.png" />
+    <None Include="wwwroot\assets\img\anhchitietduan.png" />
+    <None Include="wwwroot\assets\img\arrow-left-line.png" />
+    <None Include="wwwroot\assets\img\arrow-right-line.svg" />
+    <None Include="wwwroot\assets\img\arrow-right-up-line.svg" />
+    <None Include="wwwroot\assets\img\artboard-2-line.svg" />
+    <None Include="wwwroot\assets\img\Avatar.png" />
+    <None Include="wwwroot\assets\img\Blog Card.png" />
+    <None Include="wwwroot\assets\img\cafef_logo2022 %281%29 1.png" />
+    <None Include="wwwroot\assets\img\card1.png" />
+    <None Include="wwwroot\assets\img\card2.png" />
+    <None Include="wwwroot\assets\img\card3.png" />
+    <None Include="wwwroot\assets\img\check-double-line.png" />
+    <None Include="wwwroot\assets\img\external-link-fill.png" />
+    <None Include="wwwroot\assets\img\facebook-box-fill.png" />
+    <None Include="wwwroot\assets\img\finance-business-analytics-graph-donuts-svgrepo-com 1.png" />
+    <None Include="wwwroot\assets\img\Group.svg" />
+    <None Include="wwwroot\assets\img\hero.png" />
+    <None Include="wwwroot\assets\img\hotel-bed-line.svg" />
+    <None Include="wwwroot\assets\img\Icon.svg" />
+    <None Include="wwwroot\assets\img\Illustrator.png" />
+    <None Include="wwwroot\assets\img\Image2.png" />
+    <None Include="wwwroot\assets\img\Image3.png" />
+    <None Include="wwwroot\assets\img\linkedin-fill.png" />
+    <None Include="wwwroot\assets\img\logo1.png" />
+    <None Include="wwwroot\assets\img\logo2.png" />
+    <None Include="wwwroot\assets\img\logo3.png" />
+    <None Include="wwwroot\assets\img\logo4.png" />
+    <None Include="wwwroot\assets\img\logo5.png" />
+    <None Include="wwwroot\assets\img\logo6.png" />
+    <None Include="wwwroot\assets\img\logo7.png" />
+    <None Include="wwwroot\assets\img\logo8.png" />
+    <None Include="wwwroot\assets\img\logo9.png" />
+    <None Include="wwwroot\assets\img\mail-fill.png" />
+    <None Include="wwwroot\assets\img\NAV card.png" />
+    <None Include="wwwroot\assets\img\NAV card1.png" />
+    <None Include="wwwroot\assets\img\NAV card2.png" />
+    <None Include="wwwroot\assets\img\NAV card3.png" />
+    <None Include="wwwroot\assets\img\path856.png" />
+    <None Include="wwwroot\assets\img\Rectangle 1.png" />
+    <None Include="wwwroot\assets\img\Rectangle 2.png" />
+    <None Include="wwwroot\assets\img\Rectangle 57.png" />
+    <None Include="wwwroot\assets\img\Rectangle 58.png" />
+    <None Include="wwwroot\assets\img\Rectangle 59.png" />
+    <None Include="wwwroot\assets\img\Rectangle 60.png" />
+    <None Include="wwwroot\assets\img\Rectangle 61.png" />
+    <None Include="wwwroot\assets\img\Rectangle 62.png" />
+    <None Include="wwwroot\assets\img\Section hero.png" />
+    <None Include="wwwroot\assets\img\Section hero2.png" />
+    <None Include="wwwroot\assets\img\Section hero_dulich.png" />
+    <None Include="wwwroot\assets\img\Section_ Cách  thức đầu tư.png" />
+    <None Include="wwwroot\assets\img\Show.svg" />
+    <None Include="wwwroot\assets\img\solution_img.png" />
+    <None Include="wwwroot\assets\img\star-s-fill.svg" />
+    <None Include="wwwroot\assets\img\star-start.svg" />
+    <None Include="wwwroot\assets\js\newsFilter.js" />
+    <None Include="wwwroot\assets\js\flatpickr.js" />
+    <None Include="wwwroot\assets\js\huy.js" />
+    <None Include="wwwroot\assets\js\ngoc.js" />
+    <None Include="wwwroot\assets\js\tabs.js" />
+  </ItemGroup>
+
+</Project>

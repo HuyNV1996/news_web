@@ -1,0 +1,105 @@
+/* Styles for screens up to 557px */
+@media (max-width: 557px) {
+
+  /* banner */
+  #banner {
+    position: relative;
+    margin-top: 0px;
+  }
+#banner > img, .banner-img {
+    height: calc(100vh - 47px);
+    width: 100vw;
+    object-fit: cover;
+}
+  .banner-title {
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 46px;
+    font-family: 'Inter';
+  }
+  .banner-desc {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .banner-content {
+    padding: 20px;
+    gap: 15px;
+  }
+  .banner-btn {
+    padding: 12px 24px;
+    max-width: 170px;
+    font-size: 16px;
+  }
+
+  /* news */
+  .news-col-left {
+    margin-bottom: 15px;
+    height: 70vh;
+  }
+  .news-col-left .news-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .news-col-left .news-location {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  #giaiphap .card-content .btn-link {
+    padding: 6px 16px;
+  }
+  /* form */
+  .form-control {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .form-name-phone {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .form-content {
+    gap: 0px;
+  }
+  .form-policy-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .form-policy {
+    margin-left: 0px !important;
+    margin-bottom: 0;
+  }
+  .padding_section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .tabs-bds{
+    gap:16px;
+  }
+  .tablinks{
+    font-size: 14px;
+    padding: 40px 20px;
+  }
+  .subTablinks{
+    padding: 12px 24px; 
+    font-size: 14px;
+  }
+  .tabs-sub{
+    font-size: 14px;
+    padding: 16px !important;
+  }
+}
+/* Styles for screens between 558px and 1279px */
+@media (min-width: 558px) and (max-width: 1279px) {
+  /* Add your styles for screens between 558px and 1279px here */
+}
+
+/* Styles for screens between 1280px and 1439px */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  /* Add your styles for screens between 1280px and 1439px here */
+}
+
+/* Styles for screens 1440px and above */
+@media (min-width: 1440px) {
+  /* Add your styles for screens 1440px and above here */
+}

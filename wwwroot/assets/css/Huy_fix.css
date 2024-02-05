@@ -1,0 +1,280 @@
+﻿.active .page-link {
+    color: #fff;
+    background-color: rgb(243, 49, 49);
+}
+
+.date_picker {
+    padding: 6px 10px;
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+
+/*Form submit ttkd*/
+
+.form-policy-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between
+}
+
+.form-policy {
+    margin: 0;
+    gap: 6px;
+}
+
+.form-check-input {
+    margin-top: 6px;
+    /*   // position: unset;*/
+    margin-left: 0px;
+}
+
+.padding-mb {
+    padding: 0 10px;
+}
+
+
+.flex-1 {
+    flex: 1;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1.5;
+}
+
+input[type="radio"] + label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+
+input[type="radio"]:checked + label::before {
+    background-color: #000;
+    border-color: #fff;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+
+.form-name-phone div {
+    flex: 1;
+}
+
+.text-error-radio {
+    font-size: 16px;
+}
+
+
+.btn_copy_recruitment {
+    background-color: white;
+}
+
+.button-with-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+   // width: 240px; /* Đặt chiều rộng của button để xem hiệu ứng "ellipsis" */
+}
+
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.lds-ring {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+}
+
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border: 8px solid #fff;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #fff transparent transparent transparent;
+    }
+
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*.flex-manager {
+    display: flex;
+}*/
+
+.flex-manager-1 {
+    height: 100%;
+}
+
+.content-manager {
+    height: 100%;
+}
+
+.swiper-slide {
+    height: 100%;
+}
+
+.swiper-fix {
+    height: 450px;
+}
+
+
+.h-50 {
+    height: calc(50vh - 82px) !important;
+}
+
+#sociall,
+#revieww,
+#giaiphapp,
+#tintucc,
+#hethongkhachsann,
+#discountt,
+#chiasekinhnghiemm{
+    height: 1px;
+}
+
+#lienhee,
+#diachii,
+#tuyendungg {
+    height: 1px;
+}
+
+
+
+/*
+#loading-overlayy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1000;
+}
+
+.loading-spinnerr {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}*/
+
+@keyframes ldio-3u9jk64bxlb {
+    0%
+
+{
+    transform: rotate(0deg)
+}
+
+50% {
+    transform: rotate(180deg)
+}
+
+100% {
+    transform: rotate(360deg)
+}
+
+}
+
+.ldio-3u9jk64bxlb div {
+    position: absolute;
+    animation: ldio-3u9jk64bxlb 1s linear infinite;
+    width: 80px;
+    height: 80px;
+    top: 10px;
+    left: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 0 0 #e15b64;
+    transform-origin: 40px 41px;
+}
+
+.loadingio-spinner-eclipse-8u2eiycmo1k {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.ldio-3u9jk64bxlb {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(0.8);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+}
+
+    .ldio-3u9jk64bxlb div {
+        box-sizing: content-box;
+    }
