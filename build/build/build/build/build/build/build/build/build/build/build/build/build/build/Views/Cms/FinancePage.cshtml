@@ -1,0 +1,195 @@
+﻿@using web_ttkd.Models.Regions;
+@model web_ttkd.Models.FinancePage
+<!-- section banner PC-->
+<div id="banner">
+	<div class="d-none d-md-block">
+		<div class="w-100 banner-display">
+			<div style="max-height:100vh" class="swiper mySwiper_current">
+				<div class="swiper-wrapper">
+					@foreach (var item in Model.Banner)
+					{
+						@if (item != null && item != null && item.Media != null)
+						{
+							<div class="swiper-slide">
+								<img loading="lazy" class="banner-img object-cover" src="@(item.Media.PublicUrl.Substring(1) ?? "")" alt="@item.Media.PublicUrl.Substring(1)" />
+							</div>
+						}
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w-50 banner-wrapper ">
+		<div thumbsSlider="" class="swiper mySwiper_thumb">
+			<div class="swiper-wrapper thumb-swiper">
+				@foreach (var item in Model.Banner)
+				{
+					@if (item != null && item != null && item.Media != null)
+					{
+						<div class="swiper-slide">
+							<img loading="lazy" class="w-100 h-full pointer" src="@(item.Media.PublicUrl.Substring(1) ?? "")" alt="@item.Media.PublicUrl.Substring(1)" />
+						</div>
+					}
+				}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- section banner mobile-->
+<div class="d-block d-md-none">
+	<div class="intro-page">
+		<div id="banner">
+			@foreach (var item in Model.Banner)
+			{
+				@if (item != null && item != null && item.Media != null)
+				{
+					<div class="swiper-slide">
+						<img loading="lazy" class="w-100 object-cover" src="@(item.Media.PublicUrl.Substring(1) ?? "")" alt="@item.Media.PublicUrl.Substring(1)" />
+					</div>
+				}
+			}
+		</div>
+	</div>
+</div>
+<!-- section menu-nav -->
+<!-- Tab links -->
+<div id="fix_menu" class="sticky bg_white ">
+	<div class="tabs-bds tabs px-80 line  ">
+		@foreach (var product in Model.Asavings)
+		{
+			<a href="#fix_content" onclick="navigateToFixMenu()" class="subTablinks button-with-ellipsis menu_link uppercase hover-scale align-center justify-center
+				@if(product == Model.Asavings.First()) {
+					<text>active</text>}"
+				data-electronic=@product.Id
+			>
+				@product.Name
+			</a>
+		}
+		<a href="/tai-chinh#tu-van" class="tablinks menu_link uppercase hover-scale flex align-center justify-center">
+			Tư vấn đầu tư
+		</a>
+	</div>
+	
+</div>
+<!-- Tab content -->
+<section id="fix_content" class="wrapper_tabcontent px-80">
+	<div id="asavings" class="tabcontent active">
+		<!--section gi?i thi?u-->
+		<div class="bg-white">
+			<div class="text-center px_mobile pb-48">
+				<p class="heading_1_bold color_teal-dark">
+					GIỚI THIỆU SẢN PHẨM
+				</p>
+				<p class="body1 color_gray-7">
+					Apec Finance - Cung cấp giải pháp tài chính phù hợp với nhu cầu của mọi nhà đầu tư
+				</p>
+			</div>
+			<div id="gioithieu" class="padding_section">
+				<div class="px_mobile">
+					@if (Model.Asavings.Count > 0)
+					{
+						<div class="subtabs-content">
+							@foreach (var product in Model.Asavings)
+							{
+								<div id=@Url.Content(@product.Id) class="subTabcontent @if(product == Model.Asavings.First()) {<text>active</text>}">
+									<div class="card-radius">
+										<div class="row ">
+													<div class="col-sm-3 order-1 order-md-2 text-start text-md-center py-4 ">
+														<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" fill="none">
+															<path d="M64.094 22.8701C64.6835 22.825 65.2761 22.9001 65.8357 23.0909C66.3953 23.2817 66.9104 23.5842 67.3496 23.98C67.7756 24.361 68.115 24.8289 68.3447 25.3523C68.5745 25.8756 68.6893 26.4421 68.6814 27.0136C68.6814 35.2265 68.6814 52.3923 68.6814 59.6433C68.6727 60.6076 68.3394 61.5409 67.7354 62.2926C67.1313 63.0443 66.2917 63.5706 65.3518 63.7868C60.9304 64.9455 56.9054 67.2801 53.7043 70.5427C50.5032 73.8053 48.2455 77.8741 47.1711 82.3167C46.0968 86.7594 46.2458 91.4101 47.6023 95.7749C48.9588 100.14 51.4723 104.056 54.8757 107.107C58.279 110.158 62.4452 112.23 66.9318 113.103C71.4183 113.977 76.0576 113.618 80.3569 112.067C84.6562 110.515 88.455 107.828 91.3498 104.291C94.2445 100.754 96.1272 96.4983 96.7977 91.977C96.9075 90.9764 97.3842 90.052 98.1358 89.3824C98.8874 88.7128 99.8605 88.3455 100.867 88.3515C108.266 88.3515 125.58 88.3515 133.423 88.3515C133.965 88.3459 134.503 88.455 135 88.6718C135.497 88.8886 135.943 89.2081 136.308 89.6093C136.685 90.0012 136.978 90.4658 137.169 90.9747C137.359 91.4836 137.444 92.0261 137.418 92.5689C136.614 105.042 132.273 117.027 124.903 127.121C117.534 137.216 107.441 145.002 95.806 149.568C84.1712 154.134 71.4766 155.29 59.2084 152.902C46.9402 150.513 35.6063 144.679 26.534 136.083C17.4616 127.486 11.0263 116.482 7.98161 104.36C4.93689 92.2383 5.4088 79.4997 9.34208 67.6363C13.2754 55.7728 20.5072 45.2755 30.1907 37.3736C39.8743 29.4716 51.6087 24.4921 64.02 23.0181L64.094 22.8701Z" fill="#FB7D54" />
+															<path d="M91.1026 8.51567L88.291 9.0336V42.9951C88.2989 44.025 88.677 45.0178 89.3562 45.7921C90.0354 46.5663 90.9704 47.0705 91.9905 47.2126C97.3547 47.957 102.332 50.4225 106.175 54.2385C110.018 58.0546 112.518 63.0149 113.3 68.3738C113.427 69.3806 113.918 70.306 114.682 70.9742C115.446 71.6425 116.428 72.0072 117.443 71.9993C124.842 71.9993 141.786 71.9993 149.703 71.9993C150.285 72.0082 150.863 71.8942 151.399 71.6648C151.934 71.4353 152.415 71.0954 152.811 70.6675C153.195 70.2507 153.491 69.7607 153.682 69.2267C153.873 68.6928 153.954 68.1259 153.92 67.5599C152.902 51.4155 145.971 36.2124 134.451 24.8561C122.931 13.4998 107.63 6.78676 91.4726 6C90.3627 6 92.1385 8.51567 91.1026 8.51567Z" fill="#008573" />
+															<path d="M88.291 7.48019C88.281 7.28945 88.3099 7.09866 88.376 6.91946C88.4422 6.74027 88.5441 6.57643 88.6757 6.43795C88.8072 6.29946 88.9656 6.18925 89.1412 6.11402C89.3168 6.03879 89.5058 6.00012 89.6968 6.00039H92.2865C107.94 5.94491 123.029 11.848 134.489 22.5114C145.95 33.1748 152.923 47.7995 153.994 63.4168V67.3383C154.028 67.9043 153.947 68.4712 153.756 69.0051C153.565 69.5391 153.269 70.0291 152.884 70.4459C152.489 70.8739 152.008 71.2137 151.473 71.4432C150.937 71.6727 150.359 71.7867 149.777 71.7777H129.578C129.586 58.6416 125.657 45.8045 118.298 34.9235C110.938 24.0426 100.486 15.6174 88.291 10.7358V7.48019Z" fill="#0D3D38" />
+															<path d="M117.515 88.2031C117.506 103.898 111.885 119.072 101.668 130.985C91.4507 142.898 77.3106 150.766 61.8008 153.167C65.1289 153.698 68.4932 153.97 71.8635 153.98C88.5713 153.96 104.647 147.589 116.832 136.158C129.018 124.728 136.404 109.093 137.493 92.4206C137.506 91.33 137.11 90.2742 136.383 89.461C136.003 89.0836 135.553 88.7848 135.058 88.5816C134.563 88.3785 134.033 88.275 133.497 88.2771L117.515 88.2031Z" fill="#631B02" />
+														</svg>
+														<!--Kh?i vu�ng-->
+														<div class="d-none d-md-block">
+															<svg class="vector19" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+																<path d="M30 0H0V30H30V0Z" fill="#FB7D54" style="opacity:0.2" />
+															</svg>
+															<svg class="vector20" xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58" fill="none">
+																<path d="M58 3.8147e-06H0V58H58V3.8147e-06Z" fill="#FB7D54" style="opacity:0.2" />
+															</svg>
+															<svg class="vector21" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
+																<path d="M0 0H70V70H0V0Z" fill="#FB7D54" style="opacity:0.2" />
+															</svg>
+															<svg class="vector22" xmlns="http://www.w3.org/2000/svg" width="110" height="100" viewBox="0 0 110 100" fill="none">
+																<path d="M0 100V-10H110V99.9999L0 100Z" fill="#FB7D54" style="opacity:0.2" />
+															</svg>
+															<svg class="vector23" xmlns="http://www.w3.org/2000/svg" width="110" height="100" viewBox="0 0 110 100" fill="none">
+																<path d="M0 100V-10H110V99.9999L0 100Z" fill="#FB7D54" style="opacity:0.2; " />
+															</svg>
+														</div>
+													</div>
+													<div class="col-sm-9 order-2 order-md-1 pr-65">
+														<div class="flex flex-column gap-24 px-0 px-md-5 py-40 finance_content">
+															<p class="heading_2_bold">
+														@product.Title
+															</p>
+													@Html.Raw(product.Content)
+															<a href=@Url.Content(product.Link)>
+																<span class="heading_4_semi color_orange decoration-none">Tìm hiểu thêm</span>
+																<img src="../assets/img/external-link-fill.png"
+																		alt="" />
+															</a>
+														</div>
+													</div>
+												</div>
+									</div>
+								</div>
+							}
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</sectio>
+<!--C�ch th?c d?u tu PC-->
+<div id="tu-van">
+	<div class="d-none d-md-block  ">
+		<img class="w-100"
+			 src="../assets/img/Section_cach_thuc_dau_tu.png"
+			 alt="" />
+	</div>
+
+	<!--C�ch th?c d?u tu mobile-->
+	<div class="d-block d-md-none">
+		<div class="bg_gray px_mobile py-4">
+			<p class="heading_1_bold color_teal-dark mb-4">C�ch th?c d?u tu</p>
+			<span class="pb-4 line">
+				<span class="heading_2_bold color_orange">Bước 1</span>
+				<span class="heading_2_bold color_gray-7 ">| Tải app và tạo tài khoản</span>
+			</span>
+			<p class="heading_4 color_gray-6 mt-4 mb-4">T?i app Apec Finance App Store ho?c CH play</p>
+			<span class="mb-4">
+				<img class="mr-3 mb-4" src="../assets/img/Mobile app store badge.png" />
+				<img class=" mb-4" src="../assets/img/Mobile app store badge (1).png" />
+			</span>
+			<span class="pb-4 line">
+				<span class="heading_2_bold color_orange">Bu?c 2</span>
+				<span class="heading_2_bold color_gray-7 ">| Chọn lựa sản phẩm</span>
+			</span>
+			<p class="heading_4 color_gray-6 mt-4 mb-4">Nạp tiền và chọn lựa gói sản phẩm phù hợp với nhu cầu.</p>
+			<span class="pb-4 line">
+				<span class="heading_2_bold color_orange">Bu?c 3</span>
+				<span class="heading_2_bold color_gray-7 ">| Chọn lựa sản phẩm</span>
+			</span>
+			<p class="heading_4 color_gray-6 mt-4">Nạp tiền và chọn lựa gói sản phẩm phù hợp với nhau cầu.</p>
+		</div>
+	</div>
+
+</div>
+
+<div class="py-80">
+	<partial name="DisplayTemplates/ContactForm.cshtml" />
+</div>
+
+<script src="~/assets/js/header_menu.js"></script>
+<script src="~/assets/js/tabs.js"></script>
+
+<script type="text/javascript">
+	function navigateToFixMenu() {
+		console.log('check')
+			window.location.hash = "#tu-van";
+	}
+</script>

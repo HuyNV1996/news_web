@@ -1,0 +1,221 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.select-menu {
+    width: 100%;
+    
+}
+
+    .select-menu .select-btn {
+        display: flex;
+        height: 100%;
+        background: #ffffff;
+        padding: 6px;
+        font-size: 16px;
+        font-weight: 400;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        align-items: center;
+        cursor: pointer;
+        justify-content: space-between;
+        /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);*/
+    }
+
+    .select-menu .options {
+        display: none;
+        position: absolute;
+        width: 330px;
+        overflow-y: auto;
+        width: 100%;
+        margin-top: 10px;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 0 10px rgb(0 0 0 / 33%);
+        animation-name: fadeInDown;
+        -webkit-animation-name: fadeInDown;
+        animation-duration: 0.35s;
+        animation-fill-mode: both;
+        -webkit-animation-duration: 0.35s;
+        -webkit-animation-fill-mode: both;
+    }
+
+        .select-menu .options .option {
+            display: flex;
+            height: 48px;
+            cursor: pointer;
+            padding: 0 16px;
+            border-radius: 8px;
+            align-items: center;
+            background: #fff;
+           
+        }
+
+            .select-menu .options .option:hover {
+                background: #cdcdcd;
+               
+            }
+
+            .select-menu .options .option i {
+                font-size: 25px;
+                margin-right: 12px;
+            }
+
+            .select-menu .options .option .option-text {
+                font-size: 18px;
+                color: #333;
+                line-height: 20px;
+            }
+
+.select-btn i {
+    font-size: 25px;
+    transition: 0.3s;
+}
+
+.select-menu.active .select-btn i {
+    transform: rotate(-180deg);
+}
+
+.select-menu.active .options {
+    display: block;
+    opacity: 0;
+    z-index: 10 !important;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+}
+
+
+
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(-10px);
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translate3d(0, 20px, 0);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown_submit {
+    position: relative;
+    display: inline-block;
+}
+
+
+.dropdown_form {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 6px;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: white;
+    text-align: left;
+}
+
+.input_form_dropdown {
+    border: none;
+    border-bottom: 1px solid #b4b4b4;
+}
+
+
+.dropdown-content {
+    display: none;
+    top: 40px;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 310px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 33%);
+    padding: 10px;
+    z-index: 1;
+    border-radius: 4px;
+    transition: height 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+    .dropdown-content.active {
+        display: block;
+    }
+
+    .dropdown-content label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .dropdown-content input {
+        width: 100%;
+       // margin-bottom: 12px;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    .dropdown-content button {
+        background-color: #feefea;
+        color: rgb(0, 0, 0);
+        padding: 6px 16px;
+        border: none;
+        font-size: 14px;
+        line-height: 24px;
+        cursor: pointer;
+    }
+
+        .dropdown-content button:nth-child(2) {
+            background-color: #ff7344;
+            color: white;
+        }
+
+    .dropdown-content label {
+        color: #5e5e5e;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 20px;
+        word-wrap: break-word;
+    }
+
+    .dropdown-content input {
+        color: #000;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 24px;
+        word-wrap: break-word;
+    }
+
+        .dropdown-content input:focus-visible {
+            outline: none;
+            border-bottom: 1px solid #fb7d54;
+        }

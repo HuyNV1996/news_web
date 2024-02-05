@@ -1,0 +1,220 @@
+﻿@model web_ttkd.Models.NewsPost
+@{
+    ViewData["Title"] = !string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Title;
+    var hasImage = Model.PrimaryImage.HasValue;
+    var archive = await WebApp.Api.Pages.GetByIdAsync(Model.BlogId);
+    var listCategory =ViewBag.CategoryList;
+}
+@section head {
+    @WebApp.MetaTags(Model)
+}
+
+<section class="px-80">
+  <div class="container_news post">
+    <div class="center_news mobile_post">
+      <div class="news_title_page mobile_post mb-3">
+        <a href="/tin-tuc">
+          <div class="news_main_title"> Tin tức và kiến thức </div>
+        </a> / <div class="news_detail_page"> Chi tiết bài viết </div>
+      </div>
+      <div class="input_search mobile_post mb-3 pb-3">
+        <input class="mr-2 pl-2 bg_white" type="text" placeholder="Tìm kiếm tên, tác giả,..." />
+        <div>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.668 2.66675C21.292 2.66675 26.668 8.04275 26.668 14.6667C26.668 21.2907 21.292 26.6667 14.668 26.6667C8.04397 26.6667 2.66797 21.2907 2.66797 14.6667C2.66797 8.04275 8.04397 2.66675 14.668 2.66675ZM14.668 24.0001C19.824 24.0001 24.0013 19.8227 24.0013 14.6667C24.0013 9.50941 19.824 5.33341 14.668 5.33341C9.51064 5.33341 5.33464 9.50941 5.33464 14.6667C5.33464 19.8227 9.51064 24.0001 14.668 24.0001ZM25.9813 24.0947L29.7533 27.8654L27.8666 29.7521L24.096 25.9801L25.9813 24.0947Z" fill="black" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="container_blog">
+      <div class="post_banner_img_container">
+        <img class="post_banner_img" src="@(Model.PrimaryImage.Media.PublicUrl.Substring(1) ?? "")" alt="banner" />
+      </div>
+      <div class="container_post d-flex">
+        <div class="header_post">
+          <div class="header_post_title"> @Model.Title </div>
+          <div class="list_post_create_At">
+            <div class="box_inf_news">
+              <div class="inf-new_title uppercase">
+                <a<!-- href="@archive.Permalink/category/@Model.Category.Slug"-->@Model.Category.Title</a>
+              </div>
+              <div class="rectangle"></div>
+            <!--  <div class="text_news_post"> Phú Yên </div>
+              <div class="rectangle"></div>-->
+              <div class="text_news_post"> @Model.Published.Value.ToShortDateString() </div>
+            </div>
+          </div>
+          <div class="body_post d-flex"> @foreach (var block in Model.Blocks) { <div class="block @block.CssName()">
+              <div class="container"> @Html.DisplayFor(m => block, block.GetType().Name) </div>
+            </div>
+          } 
+            </div>
+                    <!-- <div class="d-flex justify-content-between flex_cl_mobile"></div>-->
+                    <div class="d-flex flex-row  gap-12 m-auto-0 px_mobile">
+            <!--copylink-->
+            <div onclick="Copy()" id="btn_copy_link-post" class="box_social d-flex align-content-center align-items-center">
+              <div class="flex">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="btn_copy2" d="M5.83333 4.99984V2.49984C5.83333 2.27882 5.92113 2.06686 6.07741 1.91058C6.23369 1.7543 6.44565 1.6665 6.66667 1.6665H16.6667C16.8877 1.6665 17.0996 1.7543 17.2559 1.91058C17.4122 2.06686 17.5 2.27882 17.5 2.49984V14.1665C17.5 14.3875 17.4122 14.5995 17.2559 14.7558C17.0996 14.912 16.8877 14.9998 16.6667 14.9998H14.1667V17.4998C14.1667 17.9598 13.7917 18.3332 13.3275 18.3332H3.33917C3.22927 18.3338 3.12033 18.3128 3.0186 18.2712C2.91687 18.2296 2.82436 18.1684 2.74638 18.0909C2.6684 18.0135 2.60649 17.9214 2.56421 17.82C2.52193 17.7185 2.50011 17.6097 2.5 17.4998L2.5025 5.83317C2.5025 5.37317 2.8775 4.99984 3.34167 4.99984H5.83333ZM4.16917 6.6665L4.16667 16.6665H12.5V6.6665H4.16917ZM7.5 4.99984H14.1667V13.3332H15.8333V3.33317H7.5V4.99984Z" fill="#222222" />
+                </svg>
+              </div>
+              <div class="btn_copy3"> Copy link </div>
+            </div>
+            <!--facebook-->
+                        <a href="https://www.facebook.com/sharer.php?u=" target="_blank">
+                <div class="box_social d-flex align-content-center align-items-center">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <g clip-path="url(#clip0_2904_10488)">
+                                <path d="M20 10C20 4.4772 15.5228 0 10 0C4.4772 0 0 4.4772 0 10C0 14.6896 3.2288 18.6248 7.5844 19.7056V13.056H5.5224V10H7.5844V8.6832C7.5844 5.2796 9.1248 3.702 12.4664 3.702C13.1 3.702 14.1932 3.8264 14.6404 3.9504V6.7204C14.4044 6.6956 13.9944 6.6832 13.4852 6.6832C11.8456 6.6832 11.212 7.3044 11.212 8.9192V10H14.4784L13.9172 13.056H11.212V19.9268C16.1636 19.3288 20.0004 15.1128 20.0004 10H20Z" fill="#0866FF" />
+                                <path d="M13.9182 13.0561L14.4794 10.0001H11.213V8.91935C11.213 7.30455 11.8466 6.68335 13.4862 6.68335C13.9954 6.68335 14.4054 6.69575 14.6414 6.72055V3.95055C14.1942 3.82615 13.101 3.70215 12.4674 3.70215C9.12584 3.70215 7.58544 5.27975 7.58544 8.68335V10.0001H5.52344V13.0561H7.58544V19.7057C8.35904 19.8977 9.16824 20.0001 10.001 20.0001C10.411 20.0001 10.8154 19.9749 11.2126 19.9269V13.0561H13.9178H13.9182Z" fill="white" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_2904_10488">
+                                    <rect width="20" height="20" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+             </a>
+            
+            <!--Linkin-->
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=" target="_blank">
+                <div class="box_social d-flex align-content-center align-items-center">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5.78646 4.16652C5.78624 4.60855 5.61043 5.03239 5.29771 5.34479C4.985 5.6572 4.56099 5.83258 4.11896 5.83236C3.67693 5.83214 3.2531 5.65633 2.94069 5.34361C2.62829 5.0309 2.4529 4.60688 2.45313 4.16486C2.45335 3.72283 2.62915 3.29899 2.94187 2.98659C3.25459 2.67419 3.6786 2.4988 4.12063 2.49902C4.56265 2.49924 4.98649 2.67505 5.29889 2.98777C5.6113 3.30049 5.78668 3.7245 5.78646 4.16652ZM5.83646 7.06652H2.50313V17.4999H5.83646V7.06652ZM11.1031 7.06652H7.78646V17.4999H11.0698V12.0249C11.0698 8.97486 15.0448 8.69152 15.0448 12.0249V17.4999H18.3365V10.8915C18.3365 5.74986 12.4531 5.94152 11.0698 8.46652L11.1031 7.06652Z" fill="#0A659E" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+            
+            <!--ig-->
+            <a href="https://twitter.com/intent/tweet?text=Subscribe%20to%20SagiriHimoto&url=https://twitter.com/SagiriHimoto">
+                <div class="box_social d-flex align-content-center align-items-center">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <rect x="1.25" y="1.25" width="17.5" height="17.5" rx="6" fill="url(#paint0_radial_2904_2550)" />
+                            <rect x="1.25" y="1.25" width="17.5" height="17.5" rx="6" fill="url(#paint1_radial_2904_2550)" />
+                            <rect x="1.25" y="1.25" width="17.5" height="17.5" rx="6" fill="url(#paint2_radial_2904_2550)" />
+                            <path d="M14.375 6.5625C14.375 7.08027 13.9553 7.5 13.4375 7.5C12.9197 7.5 12.5 7.08027 12.5 6.5625C12.5 6.04473 12.9197 5.625 13.4375 5.625C13.9553 5.625 14.375 6.04473 14.375 6.5625Z" fill="white" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 13.125C11.7259 13.125 13.125 11.7259 13.125 10C13.125 8.27411 11.7259 6.875 10 6.875C8.27411 6.875 6.875 8.27411 6.875 10C6.875 11.7259 8.27411 13.125 10 13.125ZM10 11.875C11.0355 11.875 11.875 11.0355 11.875 10C11.875 8.96447 11.0355 8.125 10 8.125C8.96447 8.125 8.125 8.96447 8.125 10C8.125 11.0355 8.96447 11.875 10 11.875Z" fill="white" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 9.75C3.75 7.6498 3.75 6.5997 4.15873 5.79754C4.51825 5.09193 5.09193 4.51825 5.79754 4.15873C6.5997 3.75 7.6498 3.75 9.75 3.75H10.25C12.3502 3.75 13.4003 3.75 14.2025 4.15873C14.9081 4.51825 15.4817 5.09193 15.8413 5.79754C16.25 6.5997 16.25 7.6498 16.25 9.75V10.25C16.25 12.3502 16.25 13.4003 15.8413 14.2025C15.4817 14.9081 14.9081 15.4817 14.2025 15.8413C13.4003 16.25 12.3502 16.25 10.25 16.25H9.75C7.6498 16.25 6.5997 16.25 5.79754 15.8413C5.09193 15.4817 4.51825 14.9081 4.15873 14.2025C3.75 13.4003 3.75 12.3502 3.75 10.25V9.75ZM9.75 5H10.25C11.3207 5 12.0486 5.00097 12.6112 5.04694C13.1592 5.09171 13.4395 5.17287 13.635 5.27248C14.1054 5.51217 14.4878 5.89462 14.7275 6.36502C14.8271 6.56052 14.9083 6.84078 14.9531 7.3888C14.999 7.95141 15 8.67928 15 9.75V10.25C15 11.3207 14.999 12.0486 14.9531 12.6112C14.9083 13.1592 14.8271 13.4395 14.7275 13.635C14.4878 14.1054 14.1054 14.4878 13.635 14.7275C13.4395 14.8271 13.1592 14.9083 12.6112 14.9531C12.0486 14.999 11.3207 15 10.25 15H9.75C8.67928 15 7.95141 14.999 7.3888 14.9531C6.84078 14.9083 6.56052 14.8271 6.36502 14.7275C5.89462 14.4878 5.51217 14.1054 5.27248 13.635C5.17287 13.4395 5.09171 13.1592 5.04694 12.6112C5.00097 12.0486 5 11.3207 5 10.25V9.75C5 8.67928 5.00097 7.95141 5.04694 7.3888C5.09171 6.84078 5.17287 6.56052 5.27248 6.36502C5.51217 5.89462 5.89462 5.51217 6.36502 5.27248C6.56052 5.17287 6.84078 5.09171 7.3888 5.04694C7.95141 5.00097 8.67928 5 9.75 5Z" fill="white" />
+                            <defs>
+                                <radialGradient id="paint0_radial_2904_2550" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(7.5 14.375) rotate(-55.3758) scale(15.9498)">
+                                    <stop stop-color="#B13589" />
+                                    <stop offset="0.79309" stop-color="#C62F94" />
+                                    <stop offset="1" stop-color="#8A3AC8" />
+                                </radialGradient>
+                                <radialGradient id="paint1_radial_2904_2550" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(6.875 19.375) rotate(-65.1363) scale(14.1214)">
+                                    <stop stop-color="#E0E8B7" />
+                                    <stop offset="0.444662" stop-color="#FB8A2E" />
+                                    <stop offset="0.71474" stop-color="#E2425C" />
+                                    <stop offset="1" stop-color="#E2425C" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint2_radial_2904_2550" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0.312501 1.875) rotate(-8.1301) scale(24.3068 5.19897)">
+                                    <stop offset="0.156701" stop-color="#406ADC" />
+                                    <stop offset="0.467799" stop-color="#6A45BE" />
+                                    <stop offset="1" stop-color="#6A45BE" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </a>           
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="px-80">
+    <div class="px_mobile">
+  <div class="center_recruit">
+    <div class="recruit_title"> BÀI VIẾT LIÊN QUAN </div>
+    <div class="d-none d-md-flex">
+      <div id="btn_29" class="btn-left mr-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+        </svg>
+      </div>
+      <div id="btn_30" class="btn-right">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+        </svg>
+      </div>
+    </div>
+  </div> 
+  @*bài viết liên quan PC*@ 
+  <div class="d-none d-md-block">
+        <div class="swiper " id="swiper_position_15">
+          <div class="swiper-wrapper"> 
+              @for (int i = 0; i < @Model.relateBlogPost.Count; i +=3) 
+              { <div class="swiper-slide">                 
+                      <div class="row post_popular">
+                        @for (int j = i; j < i + 3 && j < @Model.relateBlogPost.Count; j++)
+                        { 
+                            var currentPost=@Model.relateBlogPost[j]; 
+                            <div class="col-sm-4">
+                                <div class="post-popular_card">
+                                <div class="img_post">
+                                    @if (currentPost.Post.PrimaryImage != null && currentPost.Post.PrimaryImage.Media != null && currentPost.Post.PrimaryImage.Media.PublicUrl != null)
+                                    {
+                                        <a href="@currentPost.Post.Permalink">
+                                            <img  class="w-100 " style="max-height: 200px;" src="@currentPost.Post.PrimaryImage.Media.PublicUrl.Substring(1)" alt="@currentPost.Post.PrimaryImage.Media.PublicUrl.Substring(1)" />
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <img  class="w-100 " src="" alt="" />
+                                    }
+                                </div>
+                                <div class="news_popular">
+                                    <div class="new_popular_title"> @currentPost.Post.Category.Title </div>
+                                    <a href="@currentPost.Post.Permalink">
+                                        <div class="new_popular_content short-paragraph">
+                                            @currentPost.Post.Title
+                                        </div>
+                                </a>
+                                    <div class="new_popular_At"> @currentPost.Post.Published.Value.ToString("yyyy-MM-dd") </div>
+                                </div>
+                                </div>
+                            </div>  
+                         }
+                      </div>                     
+                    </div> 
+                } 
+            </div>
+        </div>
+  </div>
+  @*bài viết liên quan mobile*@ <div class="d-block d-md-none">
+    <div class="swiper mySwiper_mobile_auto">
+      <div class="swiper-wrapper">
+          @foreach (var currentPost in @Model.relateBlogPost) {
+            <div class="swiper-slide">
+                <div class="post-popular_card">
+                <div class="img_post">
+                    @if (currentPost.Post.PrimaryImage != null && currentPost.Post.PrimaryImage.Media != null && currentPost.Post.PrimaryImage.Media.PublicUrl != null)
+                        {
+                            <a href="@currentPost.Post.Permalink">
+                                <img  class="w-100 " style="max-height: 200px;" src="@currentPost.Post.PrimaryImage.Media.PublicUrl.Substring(1)" alt="@currentPost.Post.PrimaryImage.Media.PublicUrl.Substring(1)" />
+                            </a>
+                        }
+                        else
+                        {
+                            <img  class="w-100 " src="" alt="" />
+                        }
+                </div>
+                <div class="news_popular">
+                    <div class="new_popular_title"> @currentPost.Post.Category.Title </div>
+                    <div class="new_popular_content line-clamp"> @currentPost.Post.Title </div>
+                    <div class="new_popular_At"> @currentPost.Post.Published.Value.ToString("yyyy-MM-dd") </div>
+                </div>
+                </div>
+            </div>
+          }
+      </div>
+    </div>
+  </div>
+    </div>
+</section>

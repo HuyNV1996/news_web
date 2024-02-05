@@ -1,0 +1,363 @@
+﻿<!-- section banner -->
+@model web_ttkd.Models.TravelPage
+@{
+	var currentSite = await WebApp.Site.GetContentAsync<DemoSite>();
+}
+<div id="banner" class="banner position-relative">
+	@if (Model.Banner != null && Model.Banner.Media != null)
+	{
+		<img class="w-100 object-cover" src="@(Model.Banner.Media.PublicUrl.Substring(1) ?? "")" alt="@Model.Banner.Media.PublicUrl.Substring(1)" />
+	}
+	else
+	{
+		<p>Chưa cấu hình banner</p>
+	}
+	<div class="banner-form scroll-reveal">
+		<form id="formTravel" class="row ">
+			<div class="col-md-3 my-2">
+				<div class="flex flex-column gap-5 pr-0 pr-md-4 pb-2 pb-md-0 border_right border_bottom  ">
+					<div class="flex  align-items-center gap-5 mb-1 mb-md-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+							<path d="M10 17.4167L14.125 13.2917C14.9407 12.4759 15.4963 11.4365 15.7213 10.3049C15.9463 9.17337 15.8308 8.00051 15.3892 6.93465C14.9477 5.86878 14.2 4.95777 13.2408 4.31682C12.2815 3.67587 11.1537 3.33377 10 3.33377C8.8463 3.33377 7.71851 3.67587 6.75924 4.31682C5.79996 4.95777 5.05229 5.86878 4.61076 6.93465C4.16923 8.00051 4.05368 9.17337 4.27871 10.3049C4.50374 11.4365 5.05926 12.4759 5.875 13.2917L10 17.4167ZM10 19.7734L4.69667 14.47C3.64779 13.4211 2.93349 12.0847 2.64411 10.6299C2.35473 9.17504 2.50326 7.66704 3.07092 6.2966C3.63858 4.92616 4.59987 3.75483 5.83324 2.93072C7.0666 2.10661 8.51665 1.66675 10 1.66675C11.4834 1.66675 12.9334 2.10661 14.1668 2.93072C15.4001 3.75483 16.3614 4.92616 16.9291 6.2966C17.4967 7.66704 17.6453 9.17504 17.3559 10.6299C17.0665 12.0847 16.3522 13.4211 15.3033 14.47L10 19.7734ZM10 10.8334C10.442 10.8334 10.866 10.6578 11.1785 10.3452C11.4911 10.0326 11.6667 9.60871 11.6667 9.16668C11.6667 8.72466 11.4911 8.30073 11.1785 7.98817C10.866 7.67561 10.442 7.50002 10 7.50002C9.55797 7.50002 9.13405 7.67561 8.82149 7.98817C8.50893 8.30073 8.33334 8.72466 8.33334 9.16668C8.33334 9.60871 8.50893 10.0326 8.82149 10.3452C9.13405 10.6578 9.55797 10.8334 10 10.8334ZM10 12.5C9.11595 12.5 8.2681 12.1488 7.64298 11.5237C7.01786 10.8986 6.66667 10.0507 6.66667 9.16668C6.66667 8.28263 7.01786 7.43478 7.64298 6.80966C8.2681 6.18454 9.11595 5.83335 10 5.83335C10.8841 5.83335 11.7319 6.18454 12.357 6.80966C12.9821 7.43478 13.3333 8.28263 13.3333 9.16668C13.3333 10.0507 12.9821 10.8986 12.357 11.5237C11.7319 12.1488 10.8841 12.5 10 12.5Z"
+								  fill="#FB7D54" />
+						</svg>
+						<p class="body2 uppercase ml-2">Điểm đến</p>
+					</div>
+
+					<div id="location" class="select-menu">
+						<div class="select-btn">
+							<span style="color:black" class="sBtn-text color_gray-6">Bạn muốn đến đâu?</span>
+						</div>
+
+						<ul class="options ">
+							<li class="option">
+								<span class="option-text">Mandala Chăm Bay Mũi Né</span>
+							</li>
+							<li class="option">
+								<span class="option-text">Mandala Hotel & Spa Phú Yên  </span>
+							</li>
+							<li class="option">
+								<span class="option-text"> Mandala Retreats Kim Bôi</span>
+							</li>
+							<li class="option">
+								<span class="option-text">Mandala Hotel & Spa Bắc Ninh</span>
+							</li>
+							<li class="option">
+								<span class="option-text">Mandala Hotel & Suite Bắc Giang</span>
+							</li>
+						</ul>
+					</div>
+					<p id="error_location" class="none color-red text-error mt-3"> Vui lòng nhập điểm đến</p>
+
+					@* <input type="text" class="form-control" id="location" placeholder="Bạn muốn đến đâu?" /> *@
+				</div>
+			</div>
+			<div class="col-md-3 my-2">
+				<div class="flex flex-column gap-5 pr-0 pr-md-4 pb-2 pb-md-0 border_right border_bottom">
+					<div class="flex  align-items-center gap-5 mb-1 mb-md-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+							<path d="M14.5 2.49992H17.8333C18.0543 2.49992 18.2663 2.58772 18.4226 2.744C18.5789 2.90028 18.6667 3.11224 18.6667 3.33325V16.6666C18.6667 16.8876 18.5789 17.0996 18.4226 17.2558C18.2663 17.4121 18.0543 17.4999 17.8333 17.4999H2.83333C2.61232 17.4999 2.40036 17.4121 2.24408 17.2558C2.0878 17.0996 2 16.8876 2 16.6666V3.33325C2 3.11224 2.0878 2.90028 2.24408 2.744C2.40036 2.58772 2.61232 2.49992 2.83333 2.49992H6.16667V0.833252H7.83333V2.49992H12.8333V0.833252H14.5V2.49992ZM17 9.16658H3.66667V15.8333H17V9.16658ZM12.8333 4.16659H7.83333V5.83325H6.16667V4.16659H3.66667V7.49992H17V4.16659H14.5V5.83325H12.8333V4.16659ZM5.33333 10.8333H7V12.4999H5.33333V10.8333ZM9.5 10.8333H11.1667V12.4999H9.5V10.8333ZM13.6667 10.8333H15.3333V12.4999H13.6667V10.8333Z"
+								  fill="#FB7D54" />
+						</svg>
+						<p class="body2 uppercase ml-2">Ngày đến - Ngày đi</p>
+					</div>
+
+					<div class="range_date_picker">
+
+						<input class="date_picker"
+							   type="text"
+							   name="daterange"
+							   placeholder="Chọn thời gian?"
+							   id="date_picker" />
+					</div>
+					<p id="error_day" class="none color-red text-error mt-2"> Vui lòng nhập ngày đến - ngày đi</p>
+				</div>
+			</div>
+			<div class="col-md-3 my-2" id="customer">
+				<div class="flex flex-column gap-5 pr-0 pr-md-4 pb-2 pb-md-0 border_right border_bottom">
+					<div class="flex  align-items-center gap-5 mb-1 mb-md-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+							<path d="M4 18.3333C4 16.5651 4.70238 14.8694 5.95262 13.6192C7.20286 12.369 8.89856 11.6666 10.6667 11.6666C12.4348 11.6666 14.1305 12.369 15.3807 13.6192C16.631 14.8694 17.3333 16.5651 17.3333 18.3333H15.6667C15.6667 17.0072 15.1399 15.7354 14.2022 14.7977C13.2645 13.86 11.9927 13.3333 10.6667 13.3333C9.34058 13.3333 8.06881 13.86 7.13113 14.7977C6.19345 15.7354 5.66667 17.0072 5.66667 18.3333H4ZM10.6667 10.8333C7.90417 10.8333 5.66667 8.59575 5.66667 5.83325C5.66667 3.07075 7.90417 0.833252 10.6667 0.833252C13.4292 0.833252 15.6667 3.07075 15.6667 5.83325C15.6667 8.59575 13.4292 10.8333 10.6667 10.8333ZM10.6667 9.16658C12.5083 9.16658 14 7.67492 14 5.83325C14 3.99159 12.5083 2.49992 10.6667 2.49992C8.825 2.49992 7.33333 3.99159 7.33333 5.83325C7.33333 7.67492 8.825 9.16658 10.6667 9.16658Z"
+								  fill="#FB7D54" />
+						</svg>
+						<p class="body2 uppercase ml-2">Thông tin khách hàng</p>
+					</div>
+
+					<div id="dropdown_submit" class="dropdown_submit">
+
+						<button id="name_btn" type="button" style="text-align: left; color:black" class="dropdown_form color_gray-6" onclick="toggleDropdown()">Họ và tên</button>
+						<p id="error_customer" class="none color-red text-error mt-2"> Vui lòng nhập thông tin đầy đủ</p>
+						<div id="dropdownForm" class="dropdown-content">
+							<label for="name">Họ và tên</label>
+							<input class="input_form_dropdown" type="text" id="name" placeholder="Nhập tên">
+							<p id="error_name4" class="none color-red text-14 my-2"> Vui lòng nhập TÊN</p>
+
+							<label for="phone">Số điện thoại</label>
+							<input class="input_form_dropdown" type="tel" id="phone" placeholder="Nhập số điện thoại">
+							<p id="error_phone4" class="none color-red text-14 my-2"> Vui lòng nhập SĐT hợp lệ</p>
+							<div class="d-flex justify-content-end gap-12">
+
+								<button type="button" onclick="clearForm()">Đóng</button>
+								<button type="button" onclick="confirmForm()">Xác nhận</button>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="col-md-3 flex flex-column align-items-center justify-center">
+				<button class="no-border element-to-zoom banner-btn bg-primary-color" type="submit">
+					Nhận tư vấn
+				</button>
+			</div>
+		</form>
+		<span style="display:none" id="mailReceiver">@currentSite.MailReceiver</span>
+	</div>
+</div>
+
+<!-- section menu_item -->
+<div id="fix_menu" class=" d-none d-md-block custom-padding bg_gray sticky ">
+	<nav class="navbar-nav  ">
+		<ul class="nav nav-fill ">
+			<li onclick="testFunc(event)" class="nav-item">
+				<a class="nav-link custom-padding_menu border_right" href="#hethongkhachsann">HỆ THỐNG KHÁCH SẠN</a>
+			</li>
+			<li onclick="testFunc(event)" class="nav-item">
+				<a class="nav-link custom-padding_menu border_right" href="#discountt">THÔNG TIN ƯU ĐÃI</a>
+			</li>
+			<li onclick="testFunc(event)" class="nav-item">
+				<a class="nav-link custom-padding_menu " href="#kinhnghiemm">CHIA SẺ KINH NGHIỆM</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<div id="hethongkhachsann"></div>
+<!--section hệ thống khách sạn-->
+<section id="hethongkhachsan" class="padding_section px-80 ">
+	<div class="px_mobile">
+		<div class="d-flex padding-mb justify-content-between align-items-center line ">
+			<div>
+				<p class="heading_1_bold color_teal-dark">HỆ THỐNG KHÁCH SẠN</p>
+
+			</div>
+			<div class="d-none d-md-block">
+				<div class="btn_news_next mobile">
+					<div class="btn_news">
+						<div id="btn_97" class="btn-left">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+								<path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+							</svg>
+						</div>
+						<div id="btn_98" class="btn-right">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+								<path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+							</svg>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--section hệ thống khách sạn PC-->
+		<div class="d-none d-md-block">
+
+			<div class="swiper " id="swiper_position_49">
+				<div class="swiper-wrapper">
+					@foreach (var hotel in Model.ListHotel)
+					{
+						<div class="swiper-slide">
+							<div class="banner-hotel">
+								<img loading="lazy" class="w-100" style="max-height: 400px; max-width: 600px;" src="@(hotel.Banner.Media.PublicUrl.Substring(1) ?? "")" alt="">
+								<div class="banner-content-hotel">
+									<p class="heading_3_bold mb-2">@hotel.Title</p>
+									<a href=@Url.Content(hotel.Link) class="btn_hotel element-to-zoom" target="_blank">
+										Khám phá
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M13.4754 9.16689L9.00536 4.69689L10.1837 3.51855L16.6654 10.0002L10.1837 16.4819L9.00536 15.3036L13.4754 10.8336H3.33203V9.16689H13.4754Z" fill="#222222" />
+										</svg>
+									</a>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+
+
+		<!--section hệ thống khách sạn mobile-->
+		<div class="d-block d-md-none scroll-reveal">
+			<div class="swiper mySwiper_mobile_auto ">
+				<div class="swiper-wrapper">
+					@foreach (var hotel in Model.ListHotel)
+					{
+						<div class="swiper-slide">
+							<div class="banner-hotel">
+								<img loading="lazy" class="w-100" src="@(hotel.Banner.Media.PublicUrl.Substring(1) ?? "")" alt="">
+								<div class="banner-content-hotel-mobile">
+									<p class="heading_3_bold  mb-1">@hotel.Title</p>
+									<a href=@Url.Content(hotel.Link) class="btn_hotel" target="_blank">
+										Khám phá
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path d="M13.4754 9.16689L9.00536 4.69689L10.1837 3.51855L16.6654 10.0002L10.1837 16.4819L9.00536 15.3036L13.4754 10.8336H3.33203V9.16689H13.4754Z" fill="#222222" />
+										</svg>
+									</a>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--section ưu đãi-->
+<div id="discountt"></div>
+<div id="discount" class="padding_section bg_green mb-80">
+	<div class="hotel_wrapper">
+		<div class="d-none d-md-block">
+			<svg class="vector24" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+				<path d="M20 0.0410156H0V20.041H20V0.0410156Z" fill="#008573" style="opacity:0.3" />
+			</svg>
+			<svg class="vector25" xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+				<path d="M30 0.0415039H0V30.0415H30V0.0415039Z" fill="#008573" style="opacity:0.3" />
+			</svg>
+			<svg class="vector26" xmlns="http://www.w3.org/2000/svg" width="58" height="59" viewBox="0 0 58 59" fill="none">
+				<path d="M58 0.0415077H0V58.0415H58V0.0415077Z" fill="#008573" style="opacity:0.3" />
+			</svg>
+			<svg class="vector27" xmlns="http://www.w3.org/2000/svg" width="70" height="71" viewBox="0 0 70 71" fill="none">
+				<path d="M0 0.0415039H70V70.0415H0V0.0415039Z" fill="#008573" style="opacity:0.3" />
+			</svg>
+		</div>
+		<div class="d-none d-md-block">
+			<svg class="vector5" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+				<path d="M20 0.0410156H0V20.041H20V0.0410156Z" fill="#008573" style="opacity:0.3" />
+			</svg>
+			<svg class="vector6" xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+				<path d="M30 0.0415039H0V30.0415H30V0.0415039Z" fill="#008573" style="opacity:0.3" />
+			</svg>
+			<svg class="vector7" xmlns="http://www.w3.org/2000/svg" width="58" height="59" viewBox="0 0 58 59" fill="none">
+				<path d="M58 0.0415077H0V58.0415H58V0.0415077Z" fill="#008573" style="opacity:0.3" />
+			</svg>
+			<svg class="vector8" xmlns="http://www.w3.org/2000/svg" width="70" height="71" viewBox="0 0 70 71" fill="none">
+				<path d="M0 0.0415039H70V70.0415H0V0.0415039Z" fill="#008573" style="opacity:0.3" />
+			</svg>
+		</div>
+		<div class="mb-5 text-center">
+			<p class="mb-2">
+				<img src="./assets/img/Rectangle 1.png" alt="">
+				<span class="heading_4 color_orange">THÔNG TIN ƯU ĐÃI</span>
+				<img src="./assets/img/Rectangle 1.png" alt="">
+			</p>
+			@if (@Model.TitleDiscount != null)
+			{
+				<p class="heading_1_bold text-white">@Model.TitleDiscount</p>
+			}
+			
+		</div>
+		<!--section ưu đãi -->
+		<div class=" flex">
+			<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper-img-pc">
+				<div class="swiper-wrapper">
+					@if (Model.Discount.Count > 0)
+					{
+						@foreach (var discount in Model.Discount)
+						{
+							@if (discount.ImageBanner.HasValue )
+							{
+								<div class="swiper-slide">
+									<a href=@Url.Content(discount.Link) target="_blank">
+										<img class="w-100 h-100 discount-banner scroll-reveal" src="@(discount.ImageBanner.Media.PublicUrl.Substring(1) ?? "")" alt="">
+									</a>
+								</div>
+							}
+							else
+							{
+								<p class="red">Chưa cấu hình banner ưu đãi</p>
+							}
+							
+						}
+					}
+					else
+					{
+						<p class="red">Chưa cấu hình banner</p>
+					}
+				</div>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+<partial name="DisplayTemplates/ContactForm.cshtml" />
+<!--section kinh nghiệm-->
+<div id="kinhnghiemm"></div>
+<section id="kinhnghiem" class="padding_section px-80 ">
+	<div class=" px_mobile">
+		<div class="d-flex padding-mb justify-content-between align-items-center line pb-3 mb-5">
+			<div>
+				<p class="heading_1_bold color_teal-dark">CHIA SẺ KINH NGHIỆM</p>
+			</div>
+
+		</div>
+
+		<div class="row post-travel">
+		</div>
+
+		<!--pagination-->
+		<div class="mx-auto">
+			<nav aria-label="Page navigation" class="pagination-container-travel">
+				<ul class="pagination justify-content-center">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/assets/js/pagination.js"></script>
+<script src="~/assets/js/header_menu.js"></script>
+
+<script type="text/javascript">
+	var allPosts = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReadALot_Travel));
+	newsFilterFunc(allPosts);
+</script>
+<script src="~/assets/js/date_range_picker.js"></script>
+
+<script>
+	var isScrollingUp = false;
+	var lastScrollY = window.scrollY;
+
+	window.addEventListener('scroll', function () {
+		var currentScrollY = window.scrollY;
+
+		if (currentScrollY < lastScrollY) {
+			isScrollingUp = true;
+		} else {
+			isScrollingUp = false;
+		}
+
+		lastScrollY = currentScrollY;
+
+		if (isScrollingUp) {
+			console.log('scroll up')
+			var discountElement = document.getElementById('discountt');
+			var khachsanElement = document.getElementById('hethongkhachsann');
+			var chiaseElement = document.getElementById('kinhnghiemm');
+
+			discountElement.style.height = '66px';
+			khachsanElement.style.height = '50px';
+			chiaseElement.style.height = '60px';
+		} else {
+			discountElement.style.height = '1px';
+			khachsanElement.style.height = '1px';
+			chiaseElement.style.height = '1px';
+		}
+	});
+</script>

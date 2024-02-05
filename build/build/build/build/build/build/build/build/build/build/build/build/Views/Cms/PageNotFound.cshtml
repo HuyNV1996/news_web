@@ -1,0 +1,18 @@
+﻿@model web_ttkd.Models.PageNotFound
+@{
+        ViewBag.Title = Model.Title;
+}
+
+<div id="page_title">
+    <img class="img-fluid" src="@(Model.banner.ImageBanner.Media.PublicUrl.Substring(1)??"")" alt="">
+    <h2 class="page_title">@Model.banner.Title</h2>
+</div>
+<section id="content">
+    <div class="container">
+        <section id="page_not_found">
+            <h2 class="text-center">Page not found</h2>
+            <p class="text-center">Rất tiếc, trang này không tồn tại</p>
+            <h6 class="text-center"><a href="/" class="link">Về trang chủ</a></h6>
+        </section>
+    </div>
+</section>

@@ -1,0 +1,599 @@
+﻿@using web_ttkd.Models.Regions;
+@model web_ttkd.Models.RealEstatePage
+
+@{
+    var segmentBuy = ViewBag.BuySegment;
+    var buyList = ViewBag.ProductListBuy;
+
+    var segmentRent = ViewBag.RentSegment;
+    var sellList = ViewBag.ProductListSell;
+
+    var segmentConsign = ViewBag.ConsignSegment;
+    var consignList = ViewBag.ProductListConsign;
+}
+<!-- section banner -->
+<div id="banner">
+    <div class="d-none d-md-block">
+        <div class="w-100 banner-display">
+            <div style="max-height:100vh" class="swiper mySwiper_current">
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model.Banner)
+                    {
+                        @if (item != null && item != null && item.Media != null)
+                        {
+                            <div class="swiper-slide">
+                                <img loading="lazy" class="banner-img object-cover" src="@(item.Media.PublicUrl.Substring(1) ?? "")" alt="@item.Media.PublicUrl.Substring(1)" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-50 banner-wrapper ">
+        <div thumbsSlider="" class="swiper mySwiper_thumb">
+            <div class="swiper-wrapper thumb-swiper">
+                @foreach (var item in Model.Banner)
+                {
+                    @if (item != null && item != null && item.Media != null)
+                    {
+                        <div class="swiper-slide">
+                            <img loading="lazy" class="w-100 h-full pointer" src="@(item.Media.PublicUrl.Substring(1) ?? "")" alt="@item.Media.PublicUrl.Substring(1)" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- section banner mobile-->
+<div class="d-block d-md-none ">
+    <div class="intro-page">
+        <div id="banner">
+            <img class="w-100 object-cover" src="../assets/img/Frame_15.png" alt="" />
+            <div class="banner-content ">
+                <h5 class="banner-title">KHÁT VỌNG KIẾN TẠO NHỮNG BIỂU TƯỢNG <span class="primary-color">HẠNH PHÚC</span></h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Tab links -->
+<div id="fix_menu" class=" sticky bg_white">
+    <div class="tabs-bds tabs px-80">
+        <button 
+        class="tablinks bds_tablinks menu_link uppercase hover-scale flex align-center justify-center active"
+           data-electronic= "_mua">
+            Mua
+        </button>
+        <button class="tablinks bds_tablinks menu_link uppercase hover-scale flex align-center justify-center"
+           data-electronic="_cho_thue">
+            Cho thuê
+        </button>
+        <button class="tablinks bds_tablinks menu_link uppercase hover-scale flex align-center justify-center"
+           data-electronic="_ky_gui">
+            Ký gửi
+        </button>
+    </div>
+</div>
+<div class="wrapper_tabcontent ">
+    <div class="tabcontent active" id="_mua">
+        <div id="mua">
+            <div class="canhokhach">
+                <!-- d? �n mua -->
+                
+                @{
+                    var counterBtnBuy = 1;
+                    var counterSwipperBuy = 1;
+                }
+                @foreach (var productSegment in segmentBuy)
+                { 
+                        <div class="px_mobile">
+                        <div class="mb-80 realestate_sec px-80">
+                        <div class="d-flex justify-content-between align-items-center line pb-3 mb-5">
+                            <p class="heading_2 color_neutral-9 uppercase">
+                                @productSegment
+                            </p>
+                            <div class="d-none d-md-flex">
+                                <div id="btn_@counterBtnBuy" class="btn-left mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+                                    </svg>
+                                </div>
+                                <div id="btn_@(counterBtnBuy+1)" class="btn-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <div class="swiper " id="swiper_position_@counterSwipperBuy">
+                                <div class="swiper-wrapper">
+                                    @foreach (var product in Model.ProductList.Where(x => x.ProductSegment == productSegment))
+                                    {
+                                        @if (product.BussinessType.EnumValue.Equals("mua"))
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="bg_white box_shawdow rounded custom-hover">
+                                                    <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                            <img class="w-100 h-screen object-cover" style="width:200px;height: 200px;"
+                                                             src=@product.Image.Media.PublicUrl.Substring(1)
+                                                             alt="" />
+                                                    </a>
+
+                                                    <div class="p-4">
+                                                            <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                            <p style="height:70px" class="heading_4_semi color_teal-dark underline-hover mb-3">
+                                                                @product.Title
+                                                            </p>
+                                                        </a>
+                                                        <p class="body1 color_gray-6 line pb-5">
+                                                            <span class="mr-4">
+                                                                <img src="../assets/img/hotel-bed-line.svg"
+                                                                     alt="" />&nbsp;@product.RoomNum
+                                                            </span>
+                                                            <span>
+                                                                <img src="../assets/img/artboard-2-line.svg"
+                                                                     alt="" />&nbsp;@product.Square
+                                                            </span>
+                                                        </p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="body1 color_gray-6">Giá niêm yết</p>
+                                                                @if (!string.IsNullOrEmpty(product.Price))
+                                                                {
+                                                                    @if (decimal.TryParse(product.Price, out var priceAsDecimal))
+                                                                    {
+                                                                        var formattedPrice = string.Format("{0:0,0}", priceAsDecimal);
+
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @formattedPrice đ
+                                                                        </h5>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @product.Price đ
+                                                                        </h5>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h5 class="body1_semi color_teal-dark">
+                                                                        Đang cập nhật
+                                                                    </h5>
+                                                                }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!--mua cho mobile-->
+                        <div class="d-block d-md-none ">
+                            <div class="swiper mySwiper_mobile_auto ">
+                                <div class="swiper-wrapper">
+                                    @foreach (var product in Model.ProductList.Where(x => x.ProductSegment == productSegment))
+                                    {
+                                        @if (product.BussinessType.EnumValue.Equals("mua"))
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="bg_white box_shadow rounded">
+                                                        <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                            <img class="w-100 h-screen object-cover" style="width:200px;height: 200px;"
+                                                         src=@product.Image.Media.PublicUrl.Substring(1)
+                                                         alt="" />
+                                                         </a>
+                                                    <div class="p-4">
+                                                            <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                                <p style="height:60px" class="heading_4_semi color_teal-dark mb-2">
+                                                            @product.Title
+                                                        </p>
+                                                        </a>
+                                                        <p class="body1 color_gray-6 line pb-5">
+                                                            <span class="mr-3">
+                                                                <img src="./assets/img/hotel-bed-line.svg"
+                                                                     alt="" />&nbsp;@product.RoomNum
+                                                                
+                                                            </span>
+                                                            <span>
+                                                                <img src="./assets/img/artboard-2-line.svg"
+                                                                     alt="" />&nbsp;@product.Square
+                                                            </span>
+                                                        </p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="body1 color_gray-6">Giá niêm yết</p>
+                                                                @if (!string.IsNullOrEmpty(product.Price))
+                                                                {
+                                                                    @if (decimal.TryParse(product.Price, out var priceAsDecimal))
+                                                                    {
+                                                                        var formattedPrice = string.Format("{0:0,0}", priceAsDecimal);
+
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @formattedPrice d
+                                                                        </h5>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @product.Price d
+                                                                        </h5>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h5 class="body1_semi color_teal-dark">
+                                                                        Đang cập nhật
+                                                                    </h5>
+                                                                }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    counterBtnBuy = counterBtnBuy + 2;
+                    counterSwipperBuy = counterSwipperBuy + 1;
+                }
+            </div>
+            
+        </div>
+    </div>
+    <div class="tabcontent" id="_cho_thue">
+        <div id="cho-thue">
+            <div class="canhokhach">
+                <!--  cho thu� -->
+                @{
+                    var counterBtnRent = 51;
+                    var counterSwipperRent = 26;
+                }
+                @foreach (var productSegment in segmentRent)
+                {
+                    <div class="px_mobile">
+                    <div class="mb-5 realestate_sec px-80">
+                        <div class="d-flex justify-content-between align-items-center line pb-3 mb-5">
+                            <p class="heading_2 color_neutral-9 uppercase">
+                                @productSegment
+                            </p>
+                            <div class="d-none d-md-flex">
+                                <div id="btn_@counterBtnRent" class="btn-left mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+                                    </svg>
+                                </div>
+                                <div id="btn_@(counterBtnRent+1)" class="btn-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <div class="swiper mySwiper_pc_bds" id="swiper_position_@counterSwipperRent">
+                                <div class="swiper-wrapper">
+                                    @foreach (var product in Model.ProductList.Where(x => x.ProductSegment == productSegment))
+                                    {
+                                        @if (product.BussinessType.EnumValue.Equals("cho_thue"))
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="bg_white box_shawdow rounded custom-hover">
+                                                    <a href=@Url.Content(product.LinkBtn)>
+                                                            <img class="w-100 h-screen object-cover" style="width:200px;height: 200px;"
+                                                             src=@product.Image.Media.PublicUrl.Substring(1)
+                                                             alt="" />
+                                                    </a>
+
+                                                    <div class="p-4">
+                                                            <a href=@Url.Content(product.LinkBtn) target="_blank">
+
+                                                                <p style="height:70px" class="heading_4_semi color_teal-dark underline-hover mb-3">
+                                                                @product.Title
+                                                            </p>
+                                                        </a>
+                                                        <p class="body1 color_gray-6 line pb-5">
+                                                            <span class="mr-4">
+                                                                <img src="../assets/img/hotel-bed-line.svg"
+                                                                     alt="" />&nbsp;@product.RoomNum
+                                                            </span>
+                                                            <span>
+                                                                <img src="../assets/img/artboard-2-line.svg"
+                                                                     alt="" />&nbsp;@product.Square
+                                                            </span>
+                                                        </p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="body1 color_gray-6">Giá niêm yết</p>
+                                                                @if (!string.IsNullOrEmpty(product.Price))
+                                                                {
+                                                                    @if (decimal.TryParse(product.Price, out var priceAsDecimal))
+                                                                    {
+                                                                        var formattedPrice = string.Format("{0:0,0}", priceAsDecimal);
+
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @formattedPrice đ
+                                                                        </h5>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @product.Price đ
+                                                                        </h5>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h5 class="body1_semi color_teal-dark">
+                                                                        Đang cập nhật
+                                                                    </h5>
+                                                                }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- cho thu� mobile-->
+                        <div class="d-block d-md-none ">
+                            <div class="swiper mySwiper_mobile_auto ">
+                                <div class="swiper-wrapper">
+                                    @foreach (var product in Model.ProductList.Where(x => x.ProductSegment == productSegment))
+                                    {
+                                        @if (product.BussinessType.EnumValue.Equals("cho_thue"))
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="bg_white box_shadow rounded">
+                                                        <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                            <img class="w-100 h-screen object-cover" style="width:200px;height: 200px;"
+                                                         src=@product.Image.Media.PublicUrl.Substring(1)
+                                                         alt="" />
+                                                         </a>
+                                                    <div class="p-4">
+                                                            <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                                <p style="height:60px" class="heading_4_semi color_teal-dark mb-2">
+                                                            @product.Title
+                                                        </p>
+                                                        </a>
+                                                        <p class="body1 color_gray-6 line pb-5">
+                                                            <span class="mr-3">
+                                                                <img src="./assets/img/hotel-bed-line.svg"
+                                                                     alt="" />&nbsp;@product.RoomNum
+                                                            </span>
+                                                            <span>
+                                                                <img src="./assets/img/artboard-2-line.svg"
+                                                                     alt="" />&nbsp;@product.Square
+                                                            </span>
+                                                        </p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="body1 color_gray-6">Giá niêm yết</p>
+                                                                @if (!string.IsNullOrEmpty(product.Price))
+                                                                {
+                                                                    @if (decimal.TryParse(product.Price, out var priceAsDecimal))
+                                                                    {
+                                                                        var formattedPrice = string.Format("{0:0,0}", priceAsDecimal);
+
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @formattedPrice đ
+                                                                        </h5>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @product.Price đ
+                                                                        </h5>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h5 class="body1_semi color_teal-dark">
+                                                                       Đang cập nhật
+                                                                    </h5>
+                                                                }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    counterBtnRent = counterBtnRent + 2;
+                    counterSwipperRent = counterSwipperRent + 1;
+                }
+            </div>
+
+        </div>
+
+    </div>
+    <div class="tabcontent" id="_ky_gui">
+        <div id="ky-gui">
+            <div class="canhokhach">
+                <!-- d? �n k� g?i -->
+                @{
+                    var counterBtnConsign = 101;
+                    var counterSwipperConsign = 51;
+                }
+                @foreach (var productSegment in segmentConsign)
+                {
+                    <div class="px_mobile">
+                    <div class="mb-5 realestate_sec px-80">
+                        <div class="d-flex justify-content-between align-items-center line pb-3 mb-5">
+                            <p class="heading_2 color_neutral-9 uppercase">
+                                @productSegment
+                            </p>
+                            <div class="d-none d-md-flex">
+                                <div id="btn_@counterBtnConsign" class="btn-left mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+                                    </svg>
+                                </div>
+                                <div id="btn_@(counterBtnConsign+1)" class="btn-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <div class="swiper mySwiper_pc_bds" id="swiper_position_@counterSwipperConsign">
+                                <div class="swiper-wrapper">
+                                    @foreach (var product in Model.ProductList.Where(x => x.ProductSegment == productSegment))
+                                    {
+                                        @if (product.BussinessType.EnumValue.Equals("ky_gui"))
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="bg_white box_shawdow rounded custom-hover">
+                                                    <a href=@Url.Content(product.LinkBtn)>
+                                                            <img class="w-100 h-screen object-cover" style="width:200px;height: 200px;"
+                                                             src=@product.Image.Media.PublicUrl.Substring(1)
+                                                             alt="" />
+                                                    </a>
+
+                                                    <div class="p-4">
+                                                            <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                                <p style="height:70px" class="heading_4_semi color_teal-dark underline-hover mb-3">
+                                                                @product.Title
+                                                            </p>
+                                                        </a>
+                                                        <p class="body1 color_gray-6 line pb-5">
+                                                            <span class="mr-4">
+                                                                <img src="../assets/img/hotel-bed-line.svg"
+                                                                     alt="" />&nbsp;@product.RoomNum
+                                                            </span>
+                                                            <span>
+                                                                <img src="../assets/img/artboard-2-line.svg"
+                                                                     alt="" />&nbsp;@product.Square
+                                                            </span>
+                                                        </p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <p class="body1 color_gray-6">Giá niêm yết</p>
+
+                                                                @if (!string.IsNullOrEmpty(product.Price))
+                                                                {
+                                                                    @if (decimal.TryParse(product.Price, out var priceAsDecimal))
+                                                                    {
+                                                                        var formattedPrice = string.Format("{0:0,0}", priceAsDecimal);
+
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @formattedPrice d
+                                                                        </h5>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @product.Price d
+                                                                        </h5>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h5 class="body1_semi color_teal-dark">
+                                                                        Đang cập nhật
+                                                                    </h5>
+                                                                }
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!--k� g?i cho mobile-->
+                        <div class="d-block d-md-none ">
+                            <div class="swiper mySwiper_mobile_auto ">
+                                <div class="swiper-wrapper">
+                                    @foreach (var product in Model.ProductList.Where(x => x.ProductSegment == productSegment))
+                                    {
+                                        @if (product.BussinessType.EnumValue.Equals("ky_gui"))
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="bg_white box_shadow rounded">
+                                                        <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                            <img class="w-100 h-screen object-cover" style="width:200px;height: 200px;"
+                                                         src=@product.Image.Media.PublicUrl.Substring(1)
+                                                         alt="" />
+                                                         </a>
+                                                    <div class="p-4">
+                                                            <a href=@Url.Content(product.LinkBtn) target="_blank">
+                                                        <p style="height:60px" class="heading_4_semi color_teal-dark mb-2">
+                                                            @product.Title
+                                                        </p>
+                                                        </a>
+                                                        <p class="body1 color_gray-6 line pb-5">
+                                                            <span class="mr-3">
+                                                                <img src="./assets/img/hotel-bed-line.svg"
+                                                                     alt="" />&nbsp;@product.RoomNum                                                               
+                                                            </span>
+                                                            <span>
+                                                                <img src="./assets/img/artboard-2-line.svg"
+                                                                     alt="" />&nbsp;@product.Square
+                                                            </span>
+                                                        </p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            
+                                                            <p class="body1 color_gray-6">Giá niêm yết</p>
+                                                                @if (!string.IsNullOrEmpty(product.Price))
+                                                                {
+                                                                    @if (decimal.TryParse(product.Price, out var priceAsDecimal))
+                                                                    {
+                                                                        var formattedPrice = string.Format("{0:0,0}", priceAsDecimal);
+
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @formattedPrice d
+                                                                        </h5>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <h5 class="body1_semi color_orange">
+                                                                            @product.Price d
+                                                                        </h5>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h5 class="body1_semi color_teal-dark">
+                                                                        Đang cập nhật
+                                                                    </h5>
+                                                                }
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    counterBtnConsign = counterBtnConsign + 2;
+                    counterSwipperConsign = counterSwipperConsign + 1;
+                }
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="pt-80"></div>
+<partial name="DisplayTemplates/ContactForm.cshtml" />
+<div class="pb-80"></div>
+<script src="~/assets/js/header_menu.js"></script>
+<script src="~/assets/js/tabs_bds.js"></script>

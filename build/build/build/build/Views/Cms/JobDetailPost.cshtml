@@ -1,0 +1,362 @@
+﻿@model web_ttkd.Models.JobDetailPost
+@{
+
+	var detailJob = Model.Detail;
+	var jobList = ViewBag.ListJobs;
+	var currentSite = await WebApp.Site.GetContentAsync<DemoSite>();
+}
+<section>
+	<div class="container_detail post">
+		<div class="center_news recruit mobile_post">
+			<div class="news_title_page mobile_post">
+				<a href="/lien-he">
+					<div class="news_main_title">
+						Thông tin liên hệ
+					</div>
+				</a>
+				/
+				<a href="/viec-lam">
+					<div class="news_main_title">
+						Chương trình tuyển dụng
+					</div>
+				</a>
+				/
+				<div class="news_detail_page">
+					Chi tiết
+				</div>
+			</div>
+			<div class="input_search mobile_post">
+				<input type="text"
+					   placeholder="Tìm kiếm việc làm"
+					   id="search_mbc_td" />
+
+				<div id="search_icon_td" class="pointer">
+					<svg width="32"
+						 height="32"
+						 viewBox="0 0 32 32"
+						 fill="none"
+						 xmlns="http://www.w3.org/2000/svg">
+						<path d="M14.668 2.66675C21.292 2.66675 26.668 8.04275 26.668 14.6667C26.668 21.2907 21.292 26.6667 14.668 26.6667C8.04397 26.6667 2.66797 21.2907 2.66797 14.6667C2.66797 8.04275 8.04397 2.66675 14.668 2.66675ZM14.668 24.0001C19.824 24.0001 24.0013 19.8227 24.0013 14.6667C24.0013 9.50941 19.824 5.33341 14.668 5.33341C9.51064 5.33341 5.33464 9.50941 5.33464 14.6667C5.33464 19.8227 9.51064 24.0001 14.668 24.0001ZM25.9813 24.0947L29.7533 27.8654L27.8666 29.7521L24.096 25.9801L25.9813 24.0947Z"
+							  fill="black" />
+					</svg>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container_recruit_business">
+		<div class="d-flex layout_panel">
+			<div class="left_panel">
+				<div class="d-flex left_panel_title">
+					Công việc liên quan
+				</div>
+				<div class="column-content">
+					@if (jobList.Count > 0)
+					{
+						@foreach (var job in jobList)
+						{
+							<div class="recruit_des page_detail flex_item1 d-flex flex-column">
+								<a href="/viec-lam/@job.Slug">
+									<div class="main_position">
+										@job.Level
+									</div>
+								</a>
+								<div class="d-flex des_position page_detail">
+									<div class="d-flex gap-8">
+										<div class="icon_map">
+											<svg width="20"
+												 height="20"
+												 viewBox="0 0 20 20"
+												 fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<path d="M10 17.4169L14.125 13.2919C14.9407 12.4761 15.4963 11.4367 15.7213 10.3052C15.9463 9.17362 15.8308 8.00076 15.3892 6.93489C14.9477 5.86902 14.2 4.95802 13.2408 4.31707C12.2815 3.67612 11.1537 3.33401 10 3.33401C8.8463 3.33401 7.71851 3.67612 6.75924 4.31707C5.79996 4.95802 5.05229 5.86902 4.61076 6.93489C4.16923 8.00076 4.05368 9.17362 4.27871 10.3052C4.50374 11.4367 5.05926 12.4761 5.875 13.2919L10 17.4169ZM10 19.7736L4.69667 14.4703C3.64779 13.4214 2.93349 12.085 2.64411 10.6301C2.35473 9.17528 2.50326 7.66729 3.07092 6.29685C3.63858 4.9264 4.59987 3.75507 5.83324 2.93096C7.0666 2.10686 8.51665 1.66699 10 1.66699C11.4834 1.66699 12.9334 2.10686 14.1668 2.93096C15.4001 3.75507 16.3614 4.9264 16.9291 6.29685C17.4967 7.66729 17.6453 9.17528 17.3559 10.6301C17.0665 12.085 16.3522 13.4214 15.3033 14.4703L10 19.7736ZM10 10.8336C10.442 10.8336 10.866 10.658 11.1785 10.3454C11.4911 10.0329 11.6667 9.60896 11.6667 9.16693C11.6667 8.7249 11.4911 8.30098 11.1785 7.98842C10.866 7.67586 10.442 7.50026 10 7.50026C9.55797 7.50026 9.13405 7.67586 8.82149 7.98842C8.50893 8.30098 8.33334 8.7249 8.33334 9.16693C8.33334 9.60896 8.50893 10.0329 8.82149 10.3454C9.13405 10.658 9.55797 10.8336 10 10.8336ZM10 12.5003C9.11595 12.5003 8.2681 12.1491 7.64298 11.524C7.01786 10.8988 6.66667 10.051 6.66667 9.16693C6.66667 8.28287 7.01786 7.43503 7.64298 6.80991C8.2681 6.18478 9.11595 5.83359 10 5.83359C10.8841 5.83359 11.7319 6.18478 12.357 6.80991C12.9821 7.43503 13.3333 8.28287 13.3333 9.16693C13.3333 10.051 12.9821 10.8988 12.357 11.524C11.7319 12.1491 10.8841 12.5003 10 12.5003Z"
+													  fill="#5E5E5E" />
+											</svg>
+										</div>
+										<div>@job.Address</div>
+									</div>
+									<div class="d-flex gap-8">
+										<div class="icon_brief">
+											<svg width="20"
+												 height="20"
+												 viewBox="0 0 20 20"
+												 fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<path d="M5.83464 4.16683V1.66683C5.83464 1.44582 5.92243 1.23385 6.07871 1.07757C6.23499 0.921293 6.44696 0.833496 6.66797 0.833496H13.3346C13.5556 0.833496 13.7676 0.921293 13.9239 1.07757C14.0802 1.23385 14.168 1.44582 14.168 1.66683V4.16683H17.5013C17.7223 4.16683 17.9343 4.25463 18.0906 4.41091C18.2468 4.56719 18.3346 4.77915 18.3346 5.00016V16.6668C18.3346 16.8878 18.2468 17.0998 18.0906 17.2561C17.9343 17.4124 17.7223 17.5002 17.5013 17.5002H2.5013C2.28029 17.5002 2.06833 17.4124 1.91205 17.2561C1.75577 17.0998 1.66797 16.8878 1.66797 16.6668V5.00016C1.66797 4.77915 1.75577 4.56719 1.91205 4.41091C2.06833 4.25463 2.28029 4.16683 2.5013 4.16683H5.83464ZM3.33464 13.3335V15.8335H16.668V13.3335H3.33464ZM3.33464 11.6668H16.668V5.8335H3.33464V11.6668ZM7.5013 2.50016V4.16683H12.5013V2.50016H7.5013ZM9.16797 9.16683H10.8346V10.8335H9.16797V9.16683Z"
+													  fill="#5E5E5E" />
+											</svg>
+										</div>
+										<div>
+											@job.Level
+										</div>
+									</div>
+									<div class="d-flex gap-8">
+										<div class="icon_time">
+											<svg width="20"
+												 height="20"
+												 viewBox="0 0 20 20"
+												 fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<path d="M10.0013 18.3332C5.3988 18.3332 1.66797 14.6023 1.66797 9.99984C1.66797 5.39734 5.3988 1.6665 10.0013 1.6665C14.6038 1.6665 18.3346 5.39734 18.3346 9.99984C18.3346 14.6023 14.6038 18.3332 10.0013 18.3332ZM10.0013 16.6665C11.7694 16.6665 13.4651 15.9641 14.7153 14.7139C15.9656 13.4636 16.668 11.7679 16.668 9.99984C16.668 8.23173 15.9656 6.53604 14.7153 5.28579C13.4651 4.03555 11.7694 3.33317 10.0013 3.33317C8.23319 3.33317 6.5375 4.03555 5.28726 5.28579C4.03701 6.53604 3.33464 8.23173 3.33464 9.99984C3.33464 11.7679 4.03701 13.4636 5.28726 14.7139C6.5375 15.9641 8.23319 16.6665 10.0013 16.6665ZM10.8346 9.99984H14.168V11.6665H9.16797V5.83317H10.8346V9.99984Z"
+													  fill="#5E5E5E" />
+											</svg>
+										</div>
+										<div>Toàn thời gian</div>
+									</div>
+								</div>
+							</div>
+						}
+					}
+				</div>
+
+			</div>
+			<div class="right_panel">
+				<div class="panel_1 d-flex flex-column">
+					<div class="gap_mb-0 d-flex flex-column gap-32">
+						<div class="d-flex flex-column container_panel_first">
+							<div id="jobTitle" class="right_panel_position">
+								@detailJob.Level
+							</div>
+							<div class="d-flex justify-content-between">
+								<div class="box_details d-flex">
+									<div class="icon_currency">
+										<svg width="28"
+											 height="28"
+											 viewBox="0 0 28 28"
+											 fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<path d="M19.8333 18.6668H22.1667V4.66683H10.5V7.00016H19.8333V18.6668ZM19.8333 21.0002V24.5002C19.8333 25.1442 19.3083 25.6668 18.6585 25.6668H4.67483C4.52098 25.6678 4.36846 25.6383 4.22604 25.5801C4.08362 25.5219 3.95411 25.4361 3.84493 25.3277C3.73576 25.2193 3.64909 25.0903 3.5899 24.9483C3.5307 24.8063 3.50015 24.654 3.5 24.5002L3.5035 8.16683C3.5035 7.52283 4.0285 7.00016 4.67833 7.00016H8.16667V3.50016C8.16667 3.19074 8.28958 2.894 8.50838 2.6752C8.72717 2.45641 9.02391 2.3335 9.33333 2.3335H23.3333C23.6428 2.3335 23.9395 2.45641 24.1583 2.6752C24.3771 2.894 24.5 3.19074 24.5 3.50016V19.8335C24.5 20.1429 24.3771 20.4397 24.1583 20.6585C23.9395 20.8772 23.6428 21.0002 23.3333 21.0002H19.8333ZM8.16667 18.6668V21.0002H10.5V22.1668H12.8333V21.0002H13.4167C14.1902 21.0002 14.9321 20.6929 15.4791 20.1459C16.026 19.5989 16.3333 18.857 16.3333 18.0835C16.3333 17.3099 16.026 16.5681 15.4791 16.0211C14.9321 15.4741 14.1902 15.1668 13.4167 15.1668H9.91667C9.76196 15.1668 9.61358 15.1054 9.50419 14.996C9.39479 14.8866 9.33333 14.7382 9.33333 14.5835C9.33333 14.4288 9.39479 14.2804 9.50419 14.171C9.61358 14.0616 9.76196 14.0002 9.91667 14.0002H15.1667V11.6668H12.8333V10.5002H10.5V11.6668H9.91667C9.14312 11.6668 8.40125 11.9741 7.85427 12.5211C7.30729 13.0681 7 13.8099 7 14.5835C7 15.357 7.30729 16.0989 7.85427 16.6459C8.40125 17.1929 9.14312 17.5002 9.91667 17.5002H13.4167C13.5714 17.5002 13.7197 17.5616 13.8291 17.671C13.9385 17.7804 14 17.9288 14 18.0835C14 18.2382 13.9385 18.3866 13.8291 18.496C13.7197 18.6054 13.5714 18.6668 13.4167 18.6668H8.16667Z"
+												  fill="white" />
+										</svg>
+									</div>
+									<div class="content_position">
+										<div class="content_position_title">
+											Mức lương
+										</div>
+										<div class="content_position_currency">
+											@detailJob.Salary
+										</div>
+									</div>
+								</div>
+								<div class="box_details d-flex">
+									<div class="icon_currency">
+										<svg width="29"
+											 height="28"
+											 viewBox="0 0 29 28"
+											 fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<path d="M22.0926 20.2581L14.668 27.6827L7.24331 20.2581C5.77487 18.7896 4.77485 16.9187 4.36972 14.8819C3.96458 12.8451 4.17253 10.7339 4.96725 8.81529C5.76197 6.89667 7.10779 5.25681 8.8345 4.10306C10.5612 2.94931 12.5913 2.3335 14.668 2.3335C16.7447 2.3335 18.7747 2.94931 20.5014 4.10306C22.2282 5.25681 23.574 6.89667 24.3687 8.81529C25.1634 10.7339 25.3714 12.8451 24.9662 14.8819C24.5611 16.9187 23.5611 18.7896 22.0926 20.2581ZM14.668 17.5001C15.9057 17.5001 17.0926 17.0084 17.9678 16.1332C18.843 15.2581 19.3346 14.0711 19.3346 12.8334C19.3346 11.5957 18.843 10.4087 17.9678 9.53357C17.0926 8.6584 15.9057 8.16674 14.668 8.16674C13.4303 8.16674 12.2433 8.6584 11.3681 9.53357C10.493 10.4087 10.0013 11.5957 10.0013 12.8334C10.0013 14.0711 10.493 15.2581 11.3681 16.1332C12.2433 17.0084 13.4303 17.5001 14.668 17.5001ZM14.668 15.1667C14.0491 15.1667 13.4556 14.9209 13.0181 14.4833C12.5805 14.0457 12.3346 13.4522 12.3346 12.8334C12.3346 12.2146 12.5805 11.6211 13.0181 11.1835C13.4556 10.7459 14.0491 10.5001 14.668 10.5001C15.2868 10.5001 15.8803 10.7459 16.3179 11.1835C16.7555 11.6211 17.0013 12.2146 17.0013 12.8334C17.0013 13.4522 16.7555 14.0457 16.3179 14.4833C15.8803 14.9209 15.2868 15.1667 14.668 15.1667Z"
+												  fill="white" />
+										</svg>
+									</div>
+									<div class="content_position">
+										<div>Địa điểm</div>
+										<div class="content_position_currency">
+											@detailJob.Address
+										</div>
+									</div>
+								</div>
+								<div class="box_details d-flex">
+									<div class="icon_currency">
+										<svg width="29"
+											 height="28"
+											 viewBox="0 0 29 28"
+											 fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<path d="M14.3307 25.6668C7.88723 25.6668 2.66406 20.4437 2.66406 14.0002C2.66406 7.55666 7.88723 2.3335 14.3307 2.3335C20.7742 2.3335 25.9974 7.55666 25.9974 14.0002C25.9974 20.4437 20.7742 25.6668 14.3307 25.6668ZM15.4974 14.0002V8.16683H13.1641V16.3335H20.1641V14.0002H15.4974Z"
+												  fill="white" />
+										</svg>
+									</div>
+									<div class="content_position">
+										<div>Kinh nghiệm</div>
+										<div class="content_position_currency">
+											@detailJob.Exp
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="box_recruitment">
+								<a class="btn_recruitment" href="#apply-now">
+									<div class="address_flex gap-12">
+										<div class="icon_recruitment">
+											<svg width="21"
+												 height="20"
+												 viewBox="0 0 21 20"
+												 fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<path d="M2.10252 7.80845C1.67752 7.63762 1.68252 7.38345 2.13085 7.23428L18.0358 1.93261C18.4767 1.78595 18.7292 2.03262 18.6059 2.46428L14.0608 18.3693C13.9358 18.8101 13.665 18.8301 13.4633 18.4276L9.66668 10.8334L2.10252 7.80845ZM6.17752 7.64178L10.8742 9.52095L13.4075 14.5893L16.3625 4.24762L6.17668 7.64178H6.17752Z"
+													  fill="white" />
+											</svg>
+										</div>
+										<div class="text_icon_recruitment">
+											Ứng tuyển
+										</div>
+									</div>
+								</a>
+
+
+								<div onclick="Copy()" id="btn_copy_link" class="btn_copy_recruitment">
+									<div class="icon_recruitment">
+										<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M5.83333 4.99984V2.49984C5.83333 2.27882 5.92113 2.06686 6.07741 1.91058C6.23369 1.7543 6.44565 1.6665 6.66667 1.6665H16.6667C16.8877 1.6665 17.0996 1.7543 17.2559 1.91058C17.4122 2.06686 17.5 2.27882 17.5 2.49984V14.1665C17.5 14.3875 17.4122 14.5995 17.2559 14.7558C17.0996 14.912 16.8877 14.9998 16.6667 14.9998H14.1667V17.4998C14.1667 17.9598 13.7917 18.3332 13.3275 18.3332H3.33917C3.22927 18.3338 3.12033 18.3128 3.0186 18.2712C2.91687 18.2296 2.82436 18.1684 2.74638 18.0909C2.6684 18.0135 2.60649 17.9214 2.56421 17.82C2.52193 17.7185 2.50011 17.6097 2.5 17.4998L2.5025 5.83317C2.5025 5.37317 2.8775 4.99984 3.34167 4.99984H5.83333ZM4.16917 6.6665L4.16667 16.6665H12.5V6.6665H4.16917ZM7.5 4.99984H14.1667V13.3332H15.8333V3.33317H7.5V4.99984Z" fill="#fb7d54"></path>
+										</svg>
+									</div>
+									<div class="text_icon_recruitment primary">
+										Copy link
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="d-flex flex-column gap-24 body-content">
+						@Html.Raw(detailJob.Body)
+					</div>
+				</div>
+
+				<div id="apply-now" class="panel_2 d-flex flex-column gap-32">
+					<div class="panel_2_title">
+						TRỞ THÀNH THÀNH VIÊN CỦA TRUNG
+						TÂM KINH DOANH
+					</div><div id="overlay" class="overlay"></div>
+					<div id="loading" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+					<div class="FORM_INPUT_ROW">
+						<div class="FORM_INPUT">
+							<form id="form_submit_recruit" class="form_submit_recruit d-flex flex-column gap-32">
+								<div class="box_form_1 d-flex gap-24">
+									<div class="flex-1">
+
+										<input type="text"
+											   class="form-control"
+											   id="fullName"
+											   placeholder=" Họ và tên *" />
+										<p id="error1" class="none color-red text-error mt-2"> Vui lòng nhập TÊN để đăng ký</p>
+									</div>
+									<div class="flex-1">
+										<input type="tel"
+											   class="form-control"
+											   id="phoneNumber"
+											   placeholder="Số điện thoại *" />
+										<p id="error2" class="none color-red text-error mt-2"> Vui lòng nhập SỐ ĐIỆN THOẠI để đăng ký</p>
+									</div>
+								</div>
+
+								<div class="box_form_2">
+									<div>
+										<input type="email"
+											   class="form-control"
+											   id="email"
+											   placeholder="Email *" />
+										<p id="error3" class="none color-red text-error mt-2"> Vui lòng nhập EMAIL để nhận đăng ký</p>
+									</div>
+								</div>
+								<label for="files"
+									   class="drop-container"
+									   id="dropcontainer">
+									<span>
+										<svg width="46"
+											 height="46"
+											 viewBox="0 0 46 46"
+											 fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<rect x="3"
+												  y="3"
+												  width="40"
+												  height="40"
+												  rx="20"
+												  fill="#FEEFEA" />
+											<rect x="3"
+												  y="3"
+												  width="40"
+												  height="40"
+												  rx="20"
+												  stroke="#FFFAF9"
+												  stroke-width="6" />
+											<path d="M23.0004 23.4882L26.5362 27.0232L25.3571 28.2023L23.8337 26.679V31.3332H22.1671V26.6773L20.6437 28.2023L19.4646 27.0232L23.0004 23.4882ZM23.0004 14.6665C24.4312 14.6666 25.8121 15.1924 26.8806 16.1441C27.949 17.0958 28.6305 18.4069 28.7954 19.8282C29.8323 20.1109 30.7368 20.7491 31.351 21.6311C31.9651 22.5131 32.2497 23.5829 32.1551 24.6535C32.0605 25.7241 31.5926 26.7274 30.8334 27.488C30.0741 28.2487 29.0716 28.7183 28.0012 28.8148V27.1365C28.3847 27.0817 28.7534 26.9511 29.0859 26.7523C29.4183 26.5535 29.7079 26.2904 29.9375 25.9785C30.1672 25.6666 30.3325 25.312 30.4236 24.9355C30.5148 24.5591 30.53 24.1682 30.4685 23.7857C30.4069 23.4033 30.2698 23.0369 30.0652 22.708C29.8605 22.3792 29.5924 22.0944 29.2764 21.8702C28.9605 21.6461 28.603 21.4872 28.225 21.4027C27.8469 21.3182 27.4559 21.3099 27.0746 21.3782C27.2051 20.7706 27.198 20.1415 27.0539 19.537C26.9098 18.9324 26.6323 18.3678 26.2417 17.8844C25.8512 17.4011 25.3574 17.0112 24.7966 16.7433C24.2359 16.4755 23.6223 16.3365 23.0008 16.3365C22.3794 16.3365 21.7658 16.4755 21.205 16.7433C20.6442 17.0112 20.1505 17.4011 19.7599 17.8844C19.3693 18.3678 19.0918 18.9324 18.9477 19.537C18.8036 20.1415 18.7966 20.7706 18.9271 21.3782C18.1668 21.2354 17.3809 21.4005 16.7424 21.8371C16.1038 22.2738 15.6648 22.9462 15.5221 23.7065C15.3793 24.4668 15.5444 25.2527 15.981 25.8912C16.4177 26.5298 17.0901 26.9687 17.8504 27.1115L18.0004 27.1365V28.8148C16.9299 28.7184 15.9274 28.2489 15.168 27.4883C14.4086 26.7277 13.9407 25.7245 13.846 24.6539C13.7513 23.5833 14.0358 22.5134 14.6499 21.6313C15.2639 20.7492 16.1685 20.111 17.2054 19.8282C17.3702 18.4068 18.0516 17.0956 19.12 16.1439C20.1885 15.1922 21.5695 14.6664 23.0004 14.6665Z"
+												  fill="#F4632E" />
+										</svg>
+									</span>
+									<span class="drop-title">Tải CV lên</span>
+									<span class="upload_title">
+										SVG, PNG, JPG,.DOCX, .PDF or GIF
+										(max 5 mb)
+									</span>
+									<input type="file" id="files" accept=".doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, image/*" required onchange="validateFileSize(this)" />
+
+								</label>
+									<p id="error_form" class="none color-red text-error mt-2"> Vui lòng tải lên tệp của bạn</p>
+
+								<div class="d-flex justify-content-between">
+									<div class="box_register_now justify-content-between">
+										<label class="container_checkbox mb-4">
+											<input type="checkbox"
+												   checked="checked" />
+											<span class="checkmark"></span>
+										</label>
+										<div class="text_lisence layout mb-3">
+											Tôi đồng ý nhận thông
+											tin từ TTKD Apec group
+										</div>
+										@* <div class="btn_register_recruitment mb-3"> *@
+										<button type="submit" class=" btn_register_recruitment text_lisence text-light ">
+											Đăng ký ngay
+										</button>
+										@* </div> *@
+									</div>
+								</div>
+							</form>
+							<span style="display:none" id="mailReceiver">@currentSite.MailReceiver</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<nav class="mobile_pagination"
+	 aria-label="Page navigation">
+	<ul class="pagination justify-content-center">
+		<li class="page-item">
+			<a class="page-link" href="#">
+				<svg width="16"
+					 height="16"
+					 viewBox="0 0 16 16"
+					 fill="none"
+					 xmlns="http://www.w3.org/2000/svg">
+					<path d="M5.21997 7.33312H13.3346V8.66645H5.21997L8.79597 12.2425L7.8533 13.1851L2.66797 7.99979L7.8533 2.81445L8.79597 3.75712L5.21997 7.33312Z"
+						  fill="#B6B6B6" />
+				</svg>
+			</a>
+		</li>
+		<li class="page-item active">
+			<a class="page-link" href="#">1</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="#">2</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="#">...</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="#">9</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="#">10</a>
+		</li>
+
+		<li class="page-item">
+			<a class="page-link" href="#">
+				<svg width="16"
+					 height="16"
+					 viewBox="0 0 16 16"
+					 fill="none"
+					 xmlns="http://www.w3.org/2000/svg">
+					<path d="M10.7826 7.33312L7.20663 3.75712L8.1493 2.81445L13.3346 7.99979L8.1493 13.1851L7.20663 12.2425L10.7826 8.66645H2.66797V7.33312H10.7826Z"
+						  fill="#222222" />
+				</svg>
+			</a>
+		</li>
+	</ul>
+</nav>

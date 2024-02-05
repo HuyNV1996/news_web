@@ -1,0 +1,679 @@
+﻿@using web_ttkd.Models.Regions;
+@model web_ttkd.Models.IntroPage;
+@{
+    ViewBag.Title = Model.Title;
+}
+<div class="container-fluid p-0">
+    <div class="intro-page">
+        <div id="banner">
+            @if (Model.Banner != null && Model.Banner.Image.Media != null && Model.Banner.Title != null)
+            {
+                <img class="w-100 object-cover" src="@(Model.Banner.Image.Media.PublicUrl.Substring(1) ?? "")" alt="@Model.Banner.Image.Media.PublicUrl.Substring(1)" />
+                <div class="banner-content ">
+                    <h5 class="banner-title">@Model.Banner.Title</h5>
+                </div>
+            }
+            else
+            {
+                <p>Chưa cấu hình banner</p>
+            }
+        </div>
+        <section id="gioithieuchung" class="padding_section bg_white px-80">
+            <div class="px_mobile">
+                <div class="">
+                    <p class="mb-2">
+                        <span class="heading_4 color_orange">Giới thiệu chung</span>
+                        <img src="../assets/img/Rectangle 1.png" alt="">
+                    </p>
+                    <p class="heading_1_bold color_teal-dark">VỀ APEC GROUP</p>
+                </div>
+                @if (Model.AboutApecgroup != null
+                && Model.AboutApecgroup.Paragraph1 != null
+                && Model.AboutApecgroup.Paragraph2 != null
+                && Model.AboutApecgroup.Paragraph3 != null
+                && Model.AboutApecgroup.Image1 != null
+                && Model.AboutApecgroup.Image2 != null
+                )
+                {
+                    <div class="row  mb-5">
+                        <div class="col-sm-8 ">
+                            <p class="mt-3 mt-md-5 mb-3 mb-md-5 ">
+                                <span class="body1_semi color_dark text-justify">Công ty Cổ phần Đầu tư Châu Á – Thái Bình Dương – Apec Group</span>
+                                <span class="body1 color_dark text-justify">
+                                    @Model.AboutApecgroup.Paragraph1
+                                </span>
+                            </p>
+                            <div class="row ">
+                                <div class="col-sm order-2 order-md-1 scroll-left">
+                                    <p class="body1 mt-3 mb-3 text-justify">
+                                        @Model.AboutApecgroup.Paragraph2
+                                    </p>
+                                    <p class="body1 text-justify">
+                                        @Model.AboutApecgroup.Paragraph3
+                                    </p>
+                                </div>
+                                <div class="col-sm order-1 order-md-2  scroll-left">
+                                    @if (Model.AboutApecgroup != null && Model.AboutApecgroup.Image1 != null && Model.AboutApecgroup.Image1.Media != null)
+                                    {
+                                        <img class="w-100 h-100 hover-scale " src="@(Model.AboutApecgroup.Image1.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                                    }
+                                    else
+                                    {
+
+                                        <p class="red">Chưa cấu hình ảnh</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 d-none d-md-block scroll-right">
+                            @if (Model.AboutApecgroup != null && Model.AboutApecgroup.Image2 != null && Model.AboutApecgroup.Image2.Media != null)
+                            {
+                                <img class="w-100 h-100 hover-scale" src="@(Model.AboutApecgroup.Image2.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                            }
+                            else
+                            {
+
+                                <p class="red">Chưa cấu hình ảnh</p>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p class="red">Chưa cấu hình nội dung "Giới thiệu Apec group"</p>
+                }
+                @if (Model.AboutTTKD != null
+                && Model.AboutTTKD.Image != null
+                && Model.AboutTTKD.desc != null
+                )
+                {
+                    <div>
+                        <div class="row  mt-80">
+                            <div class="col-sm order-2 order-md-1 scroll-left pr-65">
+                                @if (Model.AboutTTKD != null && Model.AboutTTKD.Image != null && Model.AboutTTKD.Image.Media != null)
+                                {
+                                    <img class="w-100 object-cover hover-scale" src="@(Model.AboutTTKD.Image.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                                }
+                                else
+                                {
+
+                                    <p class="red">Chưa cấu hình ảnh</p>
+                                }
+
+                            </div>
+                            <div class="col-sm order-1 order-md-2 my-auto scroll-right ">
+                                <p class="mb-12 ">
+                                    <span class="heading_4 color_orange mb-4">Giới thiệu chung</span>
+                                    <img src="../assets/img/Rectangle 1.png" alt="">
+                                </p>
+                                <p class="heading_1_bold color_teal-dark mb-2">TRUNG TÂM KINH DOANH</p>
+                                <p class="body1 text-justify  mb-4">
+                                    @Model.AboutTTKD.desc
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p class="red">Chưa cấu hình nội dung "Giới thiệu Trung tâm kinh doanh"</p>
+                }
+
+            </div>
+        </section>
+        <!-- section tầm nhìn -->
+        <div id="tamnhin" class="padding_section py-116  bg_gray">
+            <div class="px_mobile py_mobile ">
+                <div class="d-none d-md-block">
+                    <svg class="vector9" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M20 0H0V20H20V0Z" fill="#B6B6B6" style="opacity: 0.3;" />
+                    </svg>
+                    <svg class="vector10" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                        <path d="M30 0H0V30H30V0Z" fill="#B6B6B6" style="opacity: 0.3;" />
+                    </svg>
+                    <svg class="vector11" xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58" fill="none">
+                        <path d="M58 3.8147e-06H0V58H58V3.8147e-06Z" fill="#B6B6B6" style="opacity: 0.3;" />
+                    </svg>
+                    <svg class="vector12" xmlns="http://www.w3.org/2000/svg" width="70" height="65" viewBox="0 0 70 65" fill="none">
+                        <path d="M0 0H70V70H0V0Z" fill="#B6B6B6" style="opacity: 0.3;" />
+                    </svg>
+                </div>
+                @if (Model.AboutVision != null
+                && Model.AboutVision.Vision != null
+                && Model.AboutVision.Mission != null
+                && Model.AboutVision.Image != null
+                )
+                {
+                    <div class="row no-gutters px-80 max-width">
+                        <div class="col-12 col-lg-6 scroll-left">
+                            <p class="mb-3 mb-md-5 heading_1_bold color_teal-dark ">TẦM NHÌN VÀ SỨ MỆNH</p>
+                            <div class="mb-3 mb-md-5 ">
+                                <p class="flex mb-3">
+                                    <img src="./assets/img/Rectangle 2.png" alt="">
+                                    <span class="heading_3_bold color_gray-7 ">&nbsp; Tầm nhìn</span>
+                                </p>
+                                <p class="body1 text-justify color_gray-7">
+                                    @Model.AboutVision.Vision
+                                </p>
+                            </div>
+                            <div>
+
+                                <p class="flex mb-3">
+                                    <img src="./assets/img/Rectangle 2.png" alt="">
+                                    <span class="heading_3_bold color_gray-7 ">&nbsp; Sứ mệnh</span>
+                                </p>
+                                <p class="body1 text-justify color_gray-7 mb-3">
+                                    @Model.AboutVision.Mission
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 pl-65 scroll-right">
+                            <img class="w-100 h-100 object-cover hover-scale" src="@(Model.AboutVision.Image.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p class="red">Chưa cấu hình nội dung "Tầm nhìn và sứ mệnh"</p>
+                }
+
+            </div>
+        </div>
+        <!-- section lĩnh vực hoạt động -->
+        <div id="lvhd" class="banner-lvhd ">
+            @if (Model.FiledBussiness != null
+            && Model.FiledBussiness.SubTitle != null
+            && Model.FiledBussiness.Title != null
+            && Model.FiledBussiness.ImageBanner.Media != null
+            )
+            {
+                <img class="w-100 object-cover" src=@Model.FiledBussiness.ImageBanner.Media.PublicUrl.Substring(1) alt="">
+                <div class="max-width  banner-content-lvhd scroll-left">
+                    <p class="mb-2 ">
+                        <span class="heading_4 color_orange">Lĩnh vực hoạt động</span>
+                    </p>
+                    <p class="heading_1_bold text-white mb-3">@Model.FiledBussiness.Title</p>
+                    <p class="body1 text-white ">
+                        @Model.FiledBussiness.SubTitle
+                    </p>
+                </div>
+            }
+            else
+            {
+                <p>Chưa cấu hình lĩnh vực hoạt động</p>
+            }
+        </div>
+        <!-- section dự án-->
+        <div id="duan" class="py-116  bg_gray">
+            <div class="px_mobile py_mobile">
+                <div class="max-width px-80 mb-5">
+                    <div class="d-flex justify-content-between align-items-center line pb-3 mb-5">
+                        <p>
+                            <span class="heading_2_bold color_orange">DỰ ÁN</span>
+                            <span class="heading_2">| ĐÃ VẬN HÀNH</span>
+                        </p>
+                        <!--Danh sách dự án đang triển khai cho PC-->
+                        <div class="d-none d-md-flex">
+                            <div id="btn_11" class="btn-left mr-2" onclick="disableButtons()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+                                </svg>
+                            </div>
+                            <div id="btn_12" class="btn-right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-none d-md-block">
+                        <div class="swiper " id="swiper_position_6">
+                            <div class="swiper-wrapper">
+                                @if (Model.ProjectFinished != null && Model.ProjectFinished.Count > 0)
+                                {
+                                    @foreach (var project in Model.ProjectFinished)
+                                    {
+                                        if (project != null && project.ImageBanner != null && project.SubTitle != null && project.Link != null)
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="bg_white box_shadow rounded custom-hover " style="height:435px">
+                                                    <a href="@Url.Content(@project.Link)" target="_blank">
+                                                        <img style="max-height:200px;" class="w-100" src="@(project.ImageBanner.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                                                    </a>
+                                                    <div class="p-4 ">
+                                                        <a href="@Url.Content(@project.Link)" target="_blank">
+                                                            <p style="height:70px" class="heading_4_semi color_neutral-9 line-clamp_pro underline-hover">@project.Title</p>
+                                                        </a>
+                                                        <p style="height:60px" class="body2 color_neutral-9 line pb-5 line-clamp_pro">
+                                                            @project.SubTitle
+                                                        </p>
+                                                        <a class="btn_lg my-svg element-to-zoom" href="@Url.Content(@project.Link)" target="_blank">
+                                                            Khám phá
+                                                            <svg class="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                <path d="M13.4763 9.16689L9.00634 4.69689L10.1847 3.51855L16.6663 10.0002L10.1847 16.4819L9.00634 15.3036L13.4763 10.8336H3.33301V9.16689H13.4763Z" fill="#222222" />
+                                                            </svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <p class="red">
+                                                Yêu cầu điền đẩy đủ thông tin dự án
+                                            </p>
+                                            <br />
+                                            <hr />
+                                        }
+                                    }
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--Danh sách dự án đã triển khai cho mobile-->
+                    <div class="d-block d-md-none ">
+                        <div class="swiper mySwiper_mobile_auto ">
+                            <div class="swiper-wrapper">
+                                @if (Model.ProjectFinished != null && Model.ProjectFinished.Count > 0)
+                                {
+                                    @foreach (var project in Model.ProjectFinished)
+                                    {
+                                        if (project != null && project.ImageBanner != null && project.SubTitle != null && project.Link != null)
+                                        {
+                                            <div class="swiper-slide ">
+                                                <div class="bg_white box_shawdow rounded custom-hover" style="height:425px">
+                                                    <a href="@Url.Content(@project.Link)" target="_blank">
+                                                        <img style="max-height:200px;" class="w-100" src="@(project.ImageBanner.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                                                    </a>
+                                                    <div class="p-4 ">
+                                                        <a href="@Url.Content(@project.Link)" target="_blank">
+                                                            <p style="height:60px" class="heading_4_semi color_neutral-9 ">@project.Title</p>
+                                                        </a>
+                                                        <p class="body2 color_neutral-9 line pb-5 line-clamp_pro ">
+                                                            @project.SubTitle
+                                                        </p>
+                                                        <a class="btn_lg my-svg" href="@Url.Content(@project.Link)" target="_blank">
+                                                            Khám phá
+                                                            <svg class="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                <path d="M13.4763 9.16689L9.00634 4.69689L10.1847 3.51855L16.6663 10.0002L10.1847 16.4819L9.00634 15.3036L13.4763 10.8336H3.33301V9.16689H13.4763Z" fill="#222222" />
+                                                            </svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <p class="red">
+                                                Yêu cầu điền đẩy đủ thông tin dự án
+                                            </p>
+                                            <br />
+                                            <hr />
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!--  dự án sắp triển khai-->
+                    <div class="mt-5">
+                        <div class="d-flex justify-content-between align-items-center line pb-3 mb-5">
+                            <p>
+                                <span class="heading_2_bold color_orange">DỰ ÁN</span>
+                                <span class="heading_2">| CHUẨN BỊ TRIỂN KHAI</span>
+                            </p>
+                            <!--Danh sách  dự án sắp triển khai PC-->
+                            <div class="d-none d-md-flex">
+                                <div id="btn_13" class="btn-left mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+                                    </svg>
+                                </div>
+                                <div id="btn_14" class="btn-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block">
+                            <div class="swiper" id="swiper_position_7">
+                                <div class="swiper-wrapper">
+                                    @if (Model.ProjectInprogress != null && Model.ProjectInprogress.Count > 0)
+                                    {
+                                        @foreach (var project in Model.ProjectInprogress)
+                                        {
+                                            if (project != null && project.ImageBanner != null && project.SubTitle != null && project.Link != null)
+                                            {
+                                                <div class="swiper-slide">
+                                                    <div class="bg_white box_shadow rounded custom-hover " style="height:435px">
+                                                        <a href="@Url.Content(@project.Link)" target="_blank">
+                                                            <img class="w-100" style="max-height:200px;" src="@(project.ImageBanner.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                                                        </a>
+                                                        <div class="p-4 ">
+                                                            <a href="@Url.Content(@project.Link)" target="_blank">
+                                                                <p style="height:70px" class="heading_4_semi color_neutral-9 line-clamp_pro underline-hover">@project.Title</p>
+                                                            </a>
+                                                            <p style="height:60px" class="body2 color_neutral-9 line pb-5 line-clamp_pro">
+                                                                @project.SubTitle
+                                                            </p>
+                                                            <a class="btn_lg my-svg element-to-zoom" href="@Url.Content(@project.Link)" target="_blank">
+                                                                Khám phá
+                                                                <svg class="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M13.4763 9.16689L9.00634 4.69689L10.1847 3.51855L16.6663 10.0002L10.1847 16.4819L9.00634 15.3036L13.4763 10.8336H3.33301V9.16689H13.4763Z" fill="#222222" />
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <p class="red">
+                                                    Yêu cầu điền đẩy đủ thông tin dự án
+                                                </p>
+                                                <br />
+                                                <hr />
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--Danh sách  dự án sắp triển khai mobile-->
+                        <div class="d-block d-md-none">
+                            <div class="swiper mySwiper_mobile_auto ">
+                                <div class="swiper-wrapper">
+                                    @if (Model.ProjectInprogress != null && Model.ProjectInprogress.Count > 0)
+                                    {
+                                        @foreach (var project in Model.ProjectInprogress)
+                                        {
+                                            if (project != null && project.ImageBanner != null && project.SubTitle != null && project.Link != null)
+                                            {
+                                                <div class="swiper-slide">
+                                                    <div class="bg_white box_shawdow rounded custom-hover " style="height:425px">
+                                                        <a href="@Url.Content(@project.Link)" target="_blank">
+                                                            <img style="max-height:200px;" class="w-100" src="@(project.ImageBanner.Media.PublicUrl.Substring(1) ?? "")" alt="">
+                                                        </a>
+                                                        <div class="p-4 ">
+                                                            <a href="@Url.Content(@project.Link)" target="_blank">
+                                                                <p style="height:70px" class="heading_4_semi color_neutral-9 line-clamp_pro underline-hover">@project.Title</p>
+                                                            </a>
+                                                            <p class="body2 color_neutral-9 line pb-5 line-clamp_pro">
+                                                                @project.SubTitle
+                                                            </p>
+                                                            <a class="btn_lg my-svg" href="@Url.Content(@project.Link)" target="_blank">
+                                                                Khám phá
+                                                                <svg class="" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M13.4763 9.16689L9.00634 4.69689L10.1847 3.51855L16.6663 10.0002L10.1847 16.4819L9.00634 15.3036L13.4763 10.8336H3.33301V9.16689H13.4763Z" fill="#222222" />
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <p class="red">
+                                                    Yêu cầu điền đẩy đủ thông tin dự án
+                                                </p>
+                                                <br />
+                                                <hr />
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--section đội ngũ quản lý-->
+        <div id="quanli" class="bg_green">
+            <div class="d-none d-md-block">
+                <svg class="vector24" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                    <path d="M20 0.0410156H0V20.041H20V0.0410156Z" fill="#008573" style="opacity:0.3" />
+                </svg>
+                <svg class="vector25" xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+                    <path d="M30 0.0415039H0V30.0415H30V0.0415039Z" fill="#008573" style="opacity:0.3" />
+                </svg>
+                <svg class="vector26" xmlns="http://www.w3.org/2000/svg" width="58" height="59" viewBox="0 0 58 59" fill="none">
+                    <path d="M58 0.0415077H0V58.0415H58V0.0415077Z" fill="#008573" style="opacity:0.3" />
+                </svg>
+                <svg class="vector27" xmlns="http://www.w3.org/2000/svg" width="70" height="71" viewBox="0 0 70 71" fill="none">
+                    <path d="M0 0.0415039H70V70.0415H0V0.0415039Z" fill="#008573" style="opacity:0.3" />
+                </svg>
+                <svg class="vector15" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                    <path d="M50 0V50H0L2.18557e-06 0H50Z" fill="#008573" style="opacity:0.3" />
+                </svg>
+                <svg class="vector16" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                    <path d="M80 0V80L0 80V0H80Z" fill="#008573" style="opacity:0.3" />
+                </svg>
+                <svg class="vector17" xmlns="http://www.w3.org/2000/svg" width="48" height="110" viewBox="0 0 48 110" fill="none">
+                    <path d="M110 0V110H0V0H110Z" fill="#008573" style="opacity:0.3" />
+                </svg>
+                <svg class="vector18" xmlns="http://www.w3.org/2000/svg" width="130" height="63" viewBox="0 0 130 63" fill="none">
+                    <path d="M130 -67V63H0V-67H130Z" fill="#008573" style="opacity:0.3" />
+                </svg>
+            </div>
+            <div class="quanly_containter  py-116">
+
+                <div class="px_mobile py_mobile ">
+                    <div class="px-80">
+                        <div class="d-flex justify-content-between align-items-center pb-3 line  mb-5">
+                            <p class="heading_1_bold text-white ">ĐỘI NGŨ QUẢN LÝ</p>
+                            <!--Dành cho PC-->
+                            <div class="d-none d-md-flex">
+                                <div id="btn_15" class="btn-left mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+                                    </svg>
+                                </div>
+                                <div id="btn_16" class="btn-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-md-block scroll-reveal">
+                            <div class="swiper " id="swiper_position_8">
+                                <div class="swiper-wrapper">
+                                    @if (Model.Management != null && Model.Management.Count > 0)
+                                    {
+                                        @foreach (var manager in Model.Management)
+                                        {
+                                            if (manager != null
+                                            && manager.NameTitle != null
+                                            && manager.PositionTitle != null
+                                            && manager.Description != null
+                                            && manager.Avatar != null
+                                            && manager.Avatar.Media.PublicUrl != null
+                                            )
+                                            {
+                                                <div class="swiper-slide">
+                                                    <div class="p-4 custom-hover manager" style="height:420px">
+                                                        <img style=" width:100px; height:100px" class=" mb-3 rounded-circle object-cover" src=@manager.Avatar.Media.PublicUrl.Substring(1) alt="">
+                                                        <div class="">
+                                                            <p style="height:50px" class="heading_4_semi color_gray-7 text-white mb-3">@manager.NameTitle</p>
+                                                            <h4 style="height:50px" class="body1 color_orange mb-3">@manager.PositionTitle</h4>
+                                                            <p class="body1 text-white mb-3 line-clamp5 ">@manager.Description</p>
+                                                            <!-- <span>
+                                                                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                     <path d="M2.50033 2.5H17.5003C17.7213 2.5 17.9333 2.5878 18.0896 2.74408C18.2459 2.90036 18.3337 3.11232 18.3337 3.33333V16.6667C18.3337 16.8877 18.2459 17.0996 18.0896 17.2559C17.9333 17.4122 17.7213 17.5 17.5003 17.5H2.50033C2.27931 17.5 2.06735 17.4122 1.91107 17.2559C1.75479 17.0996 1.66699 16.8877 1.66699 16.6667V3.33333C1.66699 3.11232 1.75479 2.90036 1.91107 2.74408C2.06735 2.5878 2.27931 2.5 2.50033 2.5ZM10.0503 9.73583L4.70699 5.19833L3.62783 6.46833L10.0612 11.9308L16.3787 6.46417L15.2887 5.20333L10.0512 9.73583H10.0503Z" fill="white" />
+                                                                 </svg>
+                                                                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                     <path d="M5.78353 4.16652C5.78331 4.60855 5.6075 5.03239 5.29478 5.34479C4.98207 5.6572 4.55806 5.83258 4.11603 5.83236C3.674 5.83214 3.25017 5.65633 2.93776 5.34361C2.62536 5.0309 2.44997 4.60688 2.4502 4.16486C2.45042 3.72283 2.62622 3.29899 2.93894 2.98659C3.25166 2.67419 3.67567 2.4988 4.1177 2.49902C4.55972 2.49924 4.98356 2.67505 5.29596 2.98777C5.60837 3.30049 5.78375 3.7245 5.78353 4.16652ZM5.83353 7.06652H2.5002V17.4999H5.83353V7.06652ZM11.1002 7.06652H7.78353V17.4999H11.0669V12.0249C11.0669 8.97486 15.0419 8.69152 15.0419 12.0249V17.4999H18.3335V10.8915C18.3335 5.74986 12.4502 5.94152 11.0669 8.46652L11.1002 7.06652Z" fill="white" />
+                                                                 </svg>
+                                                                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                     <path d="M12.835 17.5V11.695H14.7792L15.07 9.43833H12.835V7.99833C12.835 7.345 13.0167 6.89917 13.9533 6.89917H15.1483V4.88083C14.5698 4.81945 13.9884 4.78969 13.4067 4.79167C11.6842 4.79167 10.505 5.84333 10.505 7.775V9.43833H8.55667V11.695H10.505V17.5H3.33333C3.11232 17.5 2.90036 17.4122 2.74408 17.2559C2.5878 17.0996 2.5 16.8877 2.5 16.6667V3.33333C2.5 3.11232 2.5878 2.90036 2.74408 2.74408C2.90036 2.5878 3.11232 2.5 3.33333 2.5H16.6667C16.8877 2.5 17.0996 2.5878 17.2559 2.74408C17.4122 2.90036 17.5 3.11232 17.5 3.33333V16.6667C17.5 16.8877 17.4122 17.0996 17.2559 17.2559C17.0996 17.4122 16.8877 17.5 16.6667 17.5H12.835Z" fill="white" />
+                                                                 </svg>
+                                                             </span>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="red">
+                                            Yêu cầu điền đẩy đủ thông tin quản lý
+                                        </p>
+                                        <br />
+                                        <hr />
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--Dành cho mobile-->
+                        <div class="d-block d-md-none px-2 pb-5">
+                            <div class="swiper mySwiper_mobile_auto ">
+                                <div class="swiper-wrapper">
+                                    @if (Model.Management != null && Model.Management.Count > 0)
+                                    {
+                                        @foreach (var manager in Model.Management)
+                                        {
+                                            if (manager != null
+                                            && manager.NameTitle != null
+                                            && manager.PositionTitle != null
+                                            && manager.Description != null
+                                            && manager.Avatar != null
+                                            && manager.Avatar.Media.PublicUrl != null
+                                            )
+                                            {
+
+                                                <div class="swiper-slide">
+                                                    <div class=" p-3">
+                                                        <img style=" width:100px; height:100px" class="mb-2 object-cover" src=@manager.Avatar.Media.PublicUrl.Substring(1) alt="">
+                                                        <div>
+                                                            <p class="heading_4_semi color_gray-7 text-white mb-2">@manager.NameTitle</p>
+                                                            <p style="height:50px" class="body1 color_orange mb-2">@manager.PositionTitle</p>
+                                                            <p class="body1 text-white mb-2 line-clamp5">@manager.Description</p>
+                                                            <!-- <span>
+                                                                    <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                        <path d="M2.50033 2.5H17.5003C17.7213 2.5 17.9333 2.5878 18.0896 2.74408C18.2459 2.90036 18.3337 3.11232 18.3337 3.33333V16.6667C18.3337 16.8877 18.2459 17.0996 18.0896 17.2559C17.9333 17.4122 17.7213 17.5 17.5003 17.5H2.50033C2.27931 17.5 2.06735 17.4122 1.91107 17.2559C1.75479 17.0996 1.66699 16.8877 1.66699 16.6667V3.33333C1.66699 3.11232 1.75479 2.90036 1.91107 2.74408C2.06735 2.5878 2.27931 2.5 2.50033 2.5ZM10.0503 9.73583L4.70699 5.19833L3.62783 6.46833L10.0612 11.9308L16.3787 6.46417L15.2887 5.20333L10.0512 9.73583H10.0503Z" fill="white" />
+                                                                    </svg>
+                                                                    <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                        <path d="M5.78353 4.16652C5.78331 4.60855 5.6075 5.03239 5.29478 5.34479C4.98207 5.6572 4.55806 5.83258 4.11603 5.83236C3.674 5.83214 3.25017 5.65633 2.93776 5.34361C2.62536 5.0309 2.44997 4.60688 2.4502 4.16486C2.45042 3.72283 2.62622 3.29899 2.93894 2.98659C3.25166 2.67419 3.67567 2.4988 4.1177 2.49902C4.55972 2.49924 4.98356 2.67505 5.29596 2.98777C5.60837 3.30049 5.78375 3.7245 5.78353 4.16652ZM5.83353 7.06652H2.5002V17.4999H5.83353V7.06652ZM11.1002 7.06652H7.78353V17.4999H11.0669V12.0249C11.0669 8.97486 15.0419 8.69152 15.0419 12.0249V17.4999H18.3335V10.8915C18.3335 5.74986 12.4502 5.94152 11.0669 8.46652L11.1002 7.06652Z" fill="white" />
+                                                                    </svg>
+                                                                    <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                        <path d="M12.835 17.5V11.695H14.7792L15.07 9.43833H12.835V7.99833C12.835 7.345 13.0167 6.89917 13.9533 6.89917H15.1483V4.88083C14.5698 4.81945 13.9884 4.78969 13.4067 4.79167C11.6842 4.79167 10.505 5.84333 10.505 7.775V9.43833H8.55667V11.695H10.505V17.5H3.33333C3.11232 17.5 2.90036 17.4122 2.74408 17.2559C2.5878 17.0996 2.5 16.8877 2.5 16.6667V3.33333C2.5 3.11232 2.5878 2.90036 2.74408 2.74408C2.90036 2.5878 3.11232 2.5 3.33333 2.5H16.6667C16.8877 2.5 17.0996 2.5878 17.2559 2.74408C17.4122 2.90036 17.5 3.11232 17.5 3.33333V16.6667C17.5 16.8877 17.4122 17.0996 17.2559 17.2559C17.0996 17.4122 16.8877 17.5 16.6667 17.5H12.835Z" fill="white" />
+                                                                    </svg>
+                                                                </span>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p class="red">
+                                            Yêu cầu điền đẩy đủ thông tin quản lý
+                                        </p>
+                                        <br />
+                                        <hr />
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--section quản lí nhân sự-->
+
+            </div>
+
+
+        </div>
+
+        <section id="quanlinhansu" class="px-80">
+            <div class=" px_mobile">
+                <div class="text-start text-md-center mb-3 mb-md-5">
+                    <p class="heading_1_bold color_teal-dark">TRIẾT LÝ NHÂN SỰ</p>
+                    <p class="heading_1_bold color_orange">TRUNG TÂM KINH DOANH APEC GROUP</p>
+                </div>
+                <p class="mb-3 mb-md-5">
+                    <span class="body1_semi text-justify">
+                        Nhân sự là trung tâm trong chiến lược phát triển của Trung tâm Kinh doanh Tập
+                        Đoàn Apec Group.
+                    </span>
+                    <span class="body1 text-justify">
+                        Đây là yếu tố quan trọng, tiên quyết quyết định tới mọi thắng lợi và thành công của
+                        các chiến dịch bán hàng nhằm mang tới cho Khách hàng những giải pháp, sản phẩm chất lượng tốt nhất.
+                        Chính vì vậy chúng tôi luôn coi nhân sự cũng như tri thức, cống hiến của họ là một trong những giá
+                        trị đặc biệt quan trọng nhất.
+                    </span>
+                </p>
+                <p class=" mb-3 mb-md-4 body1_semi">
+                    Xuất phát từ quan điểm xem con người là trọng tâm, triết lý nhân sự của
+                    Trung
+                    tâm Kinh doanh được thể hiện với các nguyên tắc cơ sở như sau:
+                </p>
+                <div class="row scroll-left">
+                    <div class="col-sm-4 mb-3 ">
+                        <div class="p-4 bg_orange box_shadow rounded hover-scale" style="height: 200px;">
+                            <p class="heading_2_bold text-white ">01</p>
+                            <p class="body1_semi text-white text-justify ">
+                                Tôn trọng các giá trị đạo đức nhân văn hình thành nên con
+                                người của Trung tâm Kinh doanh Apec Group.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-3 ">
+                        <div class="p-4 bg_white box_shadow rounded hover-scale" style="height: 200px;">
+                            <p class="heading_2_bold">02</p>
+                            <p class="body1_semi text-justify">
+                                Khuyến khích, gợi mở các khả năng của đội ngũ nhân sự để cùng phát triển
+                                và thành công, gắn liền với mục tiêu chung của cả tổ chức.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-3 ">
+                        <div class="p-4 bg_orange box_shadow rounded hover-scale" style="height: 200px;">
+                            <p class="heading_2_bold text-white ">03</p>
+                            <p class="body1_semi text-white text-justify">Coi trọng và đề cao phẩm chất và tài năng của nhân viên.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row scroll-right">
+                    <div class="col-sm-4 mb-3 ">
+                        <div class="p-4 bg_white box_shadow rounded  hover-scale" style="height: 200px;">
+                            <p class="heading_2_bold">04</p>
+                            <p class="body1_semi text-justify">
+                                Coi tri thức và sáng tạo, kỷ luật là động lực phát triển bền vững của tổ
+                                chức.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-3 ">
+                        <div class="p-4 bg_green box_shadow rounded hover-scale" style="height: 200px;">
+                            <p class="heading_2_bold text-white ">05</p>
+                            <p class="body1_semi text-white text-justify">
+                                Khuyến khích tinh thần học hỏi không ngừng nhằm hướng tới những
+                                tiêu chuẩn dịch vụ ngày càng cao.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-3 ">
+                        <div class="p-4  bg_white box_shadow rounded hover-scale" style="height: 200px;">
+                            <p class="heading_2_bold">06</p>
+                            <p class="body1_semi text-justify">
+                                Cùng nhau chia sẻ công việc, kinh nghiệm và hỗ trợ nhau trong cuộc sống.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="~/assets/js/header.js"></script>

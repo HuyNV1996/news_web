@@ -1,0 +1,123 @@
+﻿.md-mobile-picker-header {
+    font-size: 14px;
+}
+
+input.md-mobile-picker-input {
+    color: initial;
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-family: arial, verdana, sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+.md-mobile-picker-button.mbsc-button {
+    font-size: 13px;
+    padding: 0 15px;
+    line-height: 36px;
+    float: right;
+    margin: 6px 0;
+    width: 100%;
+}
+
+.mbsc-col-no-padding {
+    padding-left: 0;
+}
+
+.mbsc-windows-dark.mbsc-textfield {
+    background: #ffffff;
+    color: #000;
+}
+
+    .mbsc-windows-dark.mbsc-textfield.mbsc-hover {
+        border-color: #ababab;
+    }
+
+.mbsc-windows-dark.mbsc-popup,
+.mbsc-windows-dark.mbsc-popup-arrow {
+    background: #ffffff;
+    border-color: #d1d1d1;
+}
+
+.mbsc-windows-dark.mbsc-calendar-slide {
+    background: #ffffff;
+    color: #000;
+}
+
+.mbsc-flex-col {
+    border-radius: 6px;
+}
+
+.mbsc-windows-dark.mbsc-segmented-button.mbsc-button {
+    color: #000;
+}
+
+.mbsc-material-dark.mbsc-textfield {
+    border-bottom-color: #fff;
+    color: #000;
+}
+
+.mbsc-windows-dark.mbsc-range-control-wrapper
+.mbsc-windows-dark.mbsc-segmented-button.mbsc-selected {
+    border-bottom-color: #fb7d54;
+}
+
+.mbsc-windows-dark.mbsc-range-control-label.active,
+.mbsc-windows-dark.mbsc-range-control-value.active {
+    color: #fb7d54;
+}
+
+.mbsc-windows-dark.mbsc-range-control-wrapper {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.mbsc-windows-dark.mbsc-calendar,
+.mbsc-windows-dark.mbsc-calendar-button.mbsc-button {
+    color: #000;
+}
+
+.mbsc-windows-dark.mbsc-selected.mbsc-range-day
+.mbsc-calendar-cell-inner {
+    background-color: #fb7d54;
+}
+
+.mbsc-windows-dark.mbsc-button-flat {
+    color: #fb7d54;
+}
+
+.mbsc-windows-dark.mbsc-range-day
+.mbsc-calendar-cell-inner,
+.mbsc-windows-dark.mbsc-selected
+.mbsc-calendar-cell-inner {
+    background: #fb7d5457;
+}
+
+.mbsc-windows.mbsc-textfield-wrapper {
+    margin: 0;
+}
+
+form#formTravel {
+    row-gap: 13px;
+}   }
+
+.mbsc-windows-dark.mbsc-calendar-button.mbsc-button.mbsc-active {
+    background: #fb7d54;
+}
+
+.mbsc-windows-dark.mbsc-range-control-text-empty {
+    color: #000;
+}
+
+.mbsc-windows-dark.mbsc-calendar-today,
+.mbsc-windows-dark.mbsc-calendar-week-nr {
+    color: #fb7d54;
+}
+
+
+.mbsc-windows.mbsc-textfield {
+    height: 38px;
+}

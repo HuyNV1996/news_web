@@ -1,0 +1,161 @@
+﻿@using web_ttkd.Models.Regions;
+@using web_ttkd.Models;
+@model web_ttkd.Models.ViecLamPage;
+
+
+@{
+    var jobList = ViewBag.ListJobs;
+
+}
+<div>
+    <div class="container_news recruitment header_news post">
+        <section class="center_news recruit_page mobile_post px-80">
+            <div class="news_title_page mobile_post">
+                <div class="news_main_title">
+                    <a href="lien-he">
+                        Thông tin liên hệ
+                    </a>
+
+                </div>
+                /
+                <div >
+                    Chương trình tuyển dụng
+                </div>
+            </div>
+            <div class="input_search mobile_post recruitment">
+                <input id="search_mbc_td"
+                       type="text"
+                       placeholder="Tìm kiếm tên, tác giả,..." />
+
+                <div id="search_icon_td" class="pointer">
+                    <svg width="32"
+                         height="32"
+                         viewBox="0 0 32 32"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.668 2.66675C21.292 2.66675 26.668 8.04275 26.668 14.6667C26.668 21.2907 21.292 26.6667 14.668 26.6667C8.04397 26.6667 2.66797 21.2907 2.66797 14.6667C2.66797 8.04275 8.04397 2.66675 14.668 2.66675ZM14.668 24.0001C19.824 24.0001 24.0013 19.8227 24.0013 14.6667C24.0013 9.50941 19.824 5.33341 14.668 5.33341C9.51064 5.33341 5.33464 9.50941 5.33464 14.6667C5.33464 19.8227 9.51064 24.0001 14.668 24.0001ZM25.9813 24.0947L29.7533 27.8654L27.8666 29.7521L24.096 25.9801L25.9813 24.0947Z"
+                              fill="black" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="container_img_recruit">
+        <div class="img_bg_recruit">
+            <section class="px_mobile">
+                <div class="primary_gr">
+                    APEC GROUP
+                </div>
+                <div class="title_recruit_bg">
+                    CHƯƠNG TRÌNH
+                    <span>TUYỂN DỤNG</span>
+                </div>
+                <div class="department_recruit_bg">
+                    Apec Trung tâm kinh doanh
+                </div>
+                <div class="des_recruit_bg">
+                    Người APEC luôn mang cho mình tinh
+                    thần dấn thân để trưởng thành, dấn
+                    thân để đổi mới, dấn thân để phụng
+                    sự. Chúng tôi, người APEC luôn
+                    quan niệm rằng hạnh phúc chính là
+                    phụng sự và mang đến giá trị cho
+                    chính bản thân và cộng đồng.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <section class="container_news post px-80">
+        <div class="px_mobile">
+        <div class="header_recruit d-flex ">
+            <div class="recruit_title mb-2">
+                VIỆC LÀM TỐT NHẤT
+            </div>
+            <div class="d-none d-md-block">
+            <div class="filter_controls filter_location d-flex">
+                <button class="filter-recruit-btn location_item active location_name" data-address="all">
+                    <span class="address-name">Tất cả</span>
+                    <span class="post-count"></span>
+                </button>
+                @{
+                    var uniqueAddresses = new List<string>();
+                    foreach (var post in jobList)
+                    {
+                        if (!string.IsNullOrWhiteSpace(post.Address) && !uniqueAddresses.Contains(post.Address))
+                        {
+                            uniqueAddresses.Add(post.Address);
+                        }
+                    }
+                }
+
+                @foreach (var address in uniqueAddresses)
+                {
+
+                    <button class="filter-recruit-btn location_item location_name" data-address="@address.ToLower()">
+                        <span class="address-name">@address</span>
+                        <span class="post-count"></span>
+                    </button>
+
+                }
+            </div>
+            </div>
+
+                <!--mobile-->
+                <div class="d-block d-md-none">
+
+
+                    <div class="swiper mySwiper_mobile_menu">
+                        <div class="swiper-wrapper">
+                           
+                                <button class="filter-recruit-btn location_item active location_name mr-3" data-address="all">
+                                    <span class="address-name">Tất cả</span>
+                                    <span class="post-count"></span>
+                                </button>
+                               <!--{
+                                    var uniqueAddresses = new List<string>();
+                                    foreach (var post in jobList)
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(post.Address) && !uniqueAddresses.Contains(post.Address))
+                                        {
+                                            uniqueAddresses.Add(post.Address);
+                                        }
+                                    }
+                                }-->
+
+                                @foreach (var address in uniqueAddresses)
+                                {
+                                <div class="swiper-slide">
+                                        <button class="filter-recruit-btn location_item location_name" data-address="@address.ToLower()">
+                                            <span class="address-name">@address</span>
+                                            <span class="post-count"></span>
+                                        </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+        </div>
+       
+        <div class="position_recruit ">
+            <div class="post-page-recruit row row-gap-20 w-full">
+            </div>
+        </div>
+        </div>
+    </section>
+</div>
+
+<div class="mx-auto">
+
+    <nav aria-label="Page navigation" class="pagination-container-recruit">
+        <ul class="pagination pagination-recruit justify-content-center">
+        </ul>
+    </nav>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/assets/js/filter_recruit.js"></script>
+<script type="text/javascript">
+    var recruitPost = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(jobList));
+    newsFilterFunc(recruitPost);;
+</script>

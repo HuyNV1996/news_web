@@ -1,0 +1,123 @@
+﻿@{
+	var currentSite = await WebApp.Site.GetContentAsync<DemoSite>();
+}
+<!--section liên hệ-->
+<section id="lienhe" class="padding_section px-3">
+	<div class="px-80">
+		<div class="row bg_green rounded-box">
+			<div class="d-none d-md-block">
+				<svg class="vector1" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+					<path d="M20 0.0410156H0V20.041H20V0.0410156Z" fill="#008573" style="opacity:0.3" />
+				</svg>
+				<svg class="vector2" xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+					<path d="M30 0.0415039H0V30.0415H30V0.0415039Z" fill="#008573" style="opacity:0.3" />
+				</svg>
+				<svg class="vector3" xmlns="http://www.w3.org/2000/svg" width="58" height="59" viewBox="0 0 58 59" fill="none">
+					<path d="M58 0.0415077H0V58.0415H58V0.0415077Z" fill="#008573" style="opacity:0.3" />
+				</svg>
+				<svg class="vector4" xmlns="http://www.w3.org/2000/svg" width="70" height="71" viewBox="0 0 70 71" fill="none">
+					<path d="M0 0.0415039H70V70.0415H0V0.0415039Z" fill="#008573" style="opacity:0.3" />
+				</svg>
+			</div>
+			<div class="col-sm-5 p-3 p-md-5">
+				<h2 class="heading_2_bold text-white mb-16">
+					ĐĂNG KÝ NHẬN TƯ VẤN TỪ TRUNG TÂM KINH DOANH
+				</h2>
+				<p class="body1 text-white">
+					Quý khách vui lòng liên hệ với Apec qua điện thoại, email hoặc
+					điền vào mãu thông tin để được tư vấn
+				</p>
+			</div>
+			<div class="col-sm-7 p-3 p-md-5">
+				<div id="overlay" class="overlay"></div>
+				<div id="loading" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+				<form class="form-content" id="myFormContact">
+					<div class="d-flex">
+						<div class="flex-1">
+							<input type="radio" id="type1" name="age" value="CongTacVien">
+							<label class="text-white" for="type1">Cộng tác viên</label><br>
+						</div>
+						<div class="flex-1">
+							<input type="radio" id="type2" name="age" value="DaiLy">
+							<label class="text-white" for="type2">Đại lý</label><br>
+						</div>
+					</div>
+						<p id="error1" class="none color-red text-error mt-2"> Vui lòng chọn Cộng tác viên hoặc Đại lý</p>
+
+					<div class="form-name-phone">
+						<div class="flex-1">
+							<input type="text"
+								   class="form-control"
+								   id="hoTen"
+								   placeholder="Họ và tên*" />
+							<p id="error4" class="none color-red text-error mt-2"> Vui lòng nhập TÊN để nhận tư vấn</p>
+						</div>
+						<div class="flex-1">
+							<input type="tel"
+								   class="form-control"
+								   id="soDienThoai"
+								   placeholder="Số điện thoại*" />
+							<p id="error5" class="none color-red text-error mt-2 "> Vui lòng nhập SĐT hợp lệ </p>
+						</div>
+					</div>
+					<div>
+						<input type="email"
+							   class="form-control"
+							   id="email"
+							   placeholder="Email" />
+						<p id="errorEmail2" class="none color-red text-error mt-2 "> Vui lòng nhập EMAIL hợp lệ </p>
+					</div>
+					<div class="input-container">
+						<div style="width: 100%;">
+						<div id="fieldRegister" class="select-menu">
+							<div class="select-btn">
+									<span style="color:#495057" class="sBtn-text color_gray-6">Chọn lĩnh vực đăng ký</span>
+							</div>
+							<ul class="options ">
+								<li class="option">
+									<span class="option-text">Bất động sản</span>
+								</li>
+								<li class="option">
+									<span class="option-text">Tài chính</span>
+								</li>
+								<li class="option">
+									<span class="option-text">Khách sạn</span>
+								</li>
+							</ul>
+						</div>
+						<p id="error_fieldRegister" class="none color-red text-error mt-3"> Vui lòng chọn lĩnh vực đăng ký</p>
+						</div>
+						@* <input type="text"
+							   id="dateTimePicker"
+							   placeholder="Tôi có thể nhận tư vấn vào ..."
+							   class="form-control w-full px-12 py-6 date-picker rounded" />
+						<span class="calendar-icon" id="calendarIcon">
+							<svg width="20"
+								 height="20"
+								 viewBox="0 0 20 20"
+								 fill="none"
+								 xmlns="http://www.w3.org/2000/svg">
+								<path d="M14.1666 2.49967H17.5C17.721 2.49967 17.9329 2.58747 18.0892 2.74375C18.2455 2.90003 18.3333 3.11199 18.3333 3.33301V16.6663C18.3333 16.8874 18.2455 17.0993 18.0892 17.2556C17.9329 17.4119 17.721 17.4997 17.5 17.4997H2.49996C2.27895 17.4997 2.06698 17.4119 1.9107 17.2556C1.75442 17.0993 1.66663 16.8874 1.66663 16.6663V3.33301C1.66663 3.11199 1.75442 2.90003 1.9107 2.74375C2.06698 2.58747 2.27895 2.49967 2.49996 2.49967H5.83329V0.833008H7.49996V2.49967H12.5V0.833008H14.1666V2.49967ZM12.5 4.16634H7.49996V5.83301H5.83329V4.16634H3.33329V7.49967H16.6666V4.16634H14.1666V5.83301H12.5V4.16634ZM16.6666 9.16634H3.33329V15.833H16.6666V9.16634Z"
+									  fill="#1D1D1D" />
+							</svg>
+						</span> *@
+				</div>
+					<div class="form-policy-btn mt-2">
+						<div class="flex pointer align-items-start form-policy">
+							<input type="checkbox" class="form-check-input" id="dongY" checked />
+							<div>
+								<label class="form-check-label body2 text-white" for="dongY">Tôi đồng ý nhận thông tin từ TTKD Apec group</label>
+								<p id="error6" class="none color-red text-error mt-2"> Vui lòng đồng ý nhận thông tin từ TTKD Apec group</p>
+							</div>
+						</div>
+						<button type="submit" class="btn_lienhe">Đăng ký ngay</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<span style="display:none" id="mailReceiver">@currentSite.MailReceiver</span>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="~/assets/js/flatpickr.js"></script>
+<script src="~/assets/js/fieldform_submit.js"></script>

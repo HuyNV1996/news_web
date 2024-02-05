@@ -1,0 +1,672 @@
+﻿@{
+    string currentUrl = ViewContext.HttpContext.Request.Path;
+    var currentSite = await WebApp.Site.GetContentAsync<DemoSite>();
+}
+<header >
+    <div class="menu_mobile z-9999">
+        <ul class="px-20 py-8">
+            <li class="list-none"><a href="/">Trang chủ</a></li>
+            <li class="list-none"><a href="/gioi-thieu">Giới thiệu</a></li>
+            <li class="list-none flex justify-content-between "
+                onclick="openPage()">
+                <a href="/bat-dong-san">Bất động sản</a>
+                <div class="mobile_icon">
+                    <svg width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.9766 10.0001L6.85156 5.87511L8.0299 4.69678L13.3332 10.0001L8.0299 15.3034L6.85156 14.1251L10.9766 10.0001Z"
+                              fill="#222222" />
+                    </svg>
+                </div>
+            </li>
+            <li class="list-none flex align-items-center justify-content-between" onclick="openPage('finance')">
+                <a class="page_finance_mb" href="/tai-chinh">Tài chính</a>
+                <div class="mobile_icon">
+                    <svg width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.9766 10.0001L6.85156 5.87511L8.0299 4.69678L13.3332 10.0001L8.0299 15.3034L6.85156 14.1251L10.9766 10.0001Z"
+                              fill="#222222" />
+                    </svg>
+                </div>
+            </li>
+            <li class="list-none flex align-items-center justify-content-between" onclick="openPage('travel')">
+                <a class="page_travel_mb" href="/du-lich">Du lịch</a>
+                <div class="mobile_icon">
+                    <svg width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.9766 10.0001L6.85156 5.87511L8.0299 4.69678L13.3332 10.0001L8.0299 15.3034L6.85156 14.1251L10.9766 10.0001Z"
+                              fill="#222222" />
+                    </svg>
+                </div>
+            </li>
+            <li class="list-none flex align-items-center justify-content-between">
+                <a href="/tin-tuc">Tin tức và kiến thức</a>
+                @* <div class="mobile_icon">
+                    <svg width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.9766 10.0001L6.85156 5.87511L8.0299 4.69678L13.3332 10.0001L8.0299 15.3034L6.85156 14.1251L10.9766 10.0001Z"
+                              fill="#222222" />
+                    </svg>
+                </div> *@
+            </li>
+            <li class="list-none flex align-items-center justify-content-between">
+                <a href="/lien-he">Liên hệ</a>
+                @* <div class="mobile_icon">
+                    <svg width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.9766 10.0001L6.85156 5.87511L8.0299 4.69678L13.3332 10.0001L8.0299 15.3034L6.85156 14.1251L10.9766 10.0001Z"
+                              fill="#222222" />
+                    </svg>
+                </div> *@
+            </li>
+            
+        </ul>
+        <div id="page" class="page_bds">
+            <div class="header_page">
+                <div class="d-flex header_page_bds mbsc-align-center">
+                    <div onclick="goBack()"
+                         class="icon_page_bds">
+                        <svg width="20"
+                             height="20"
+                             viewBox="0 0 20 20"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.5235 9.16664H16.6668V10.8333H6.5235L10.9935 15.3033L9.81516 16.4816L3.3335 9.99998L9.81516 3.51831L10.9935 4.69664L6.5235 9.16664Z"
+                                  fill="#222222" />
+                        </svg>
+                    </div>
+                    <div class="page_title">
+                        Bất động sản
+                    </div>
+                </div>
+                <div class="nav-wrapper">
+                    @foreach(var product in currentSite.RealEstateFeatured.Take(3))
+                    {
+                        @if (product.Banner != null && product.Desc != null && product.Title != null && product.Link != null)
+                        {
+                            <div class="nav_item_menu">
+                                <div class="img_page">
+                                    <img src="@product.Banner.Media.PublicUrl.Substring(1)"
+                                         alt="" />
+                                </div>
+                                <div class="content_page bg-gray p-12 w-full">
+                                    <div class="page_title">
+                                        @product.Title
+                                    </div>
+                                    <div class="page_des">
+                                        @product.Desc
+                                    </div>
+                                    <a class="read__more" href=@Url.Content(product.Link)>
+                                        <div class="page_link">
+                                            Xem thêm
+                                            <div class="link_icon">
+                                                <svg width="8"
+                                                     height="8"
+                                                     viewBox="0 0 8 8"
+                                                     fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6.33582 2.4915L1.31507 7.51225L0.490234 6.68742L5.5104 1.66667H1.08582V0.5H7.50248V6.91667H6.33582V2.4915Z"
+                                                          fill="#000" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </a>                                   
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+                    
+                    <div class="footer_page d-flex">
+                        <a href="/bat-dong-san#_mua" data-tab="mua"><div class="footer_title">Mua</div></a>
+                        <a href="/bat-dong-san#_cho_thue" data-tab="cho_thue"><div class="footer_title">Cho thuê</div></a>
+                        <a href="/bat-dong-san#_ky_gui" data-tab="ky_gui"><div class="footer_title">Ký gửi</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page" class="page_finance">
+            <div class="header_page">
+                <div class="d-flex header_page_finance mbsc-align-center">
+                    <div onclick="goBackFinance()"
+                         class="icon_page_bds">
+                        <svg width="20"
+                             height="20"
+                             viewBox="0 0 20 20"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.5235 9.16664H16.6668V10.8333H6.5235L10.9935 15.3033L9.81516 16.4816L3.3335 9.99998L9.81516 3.51831L10.9935 4.69664L6.5235 9.16664Z"
+                                  fill="#222222" />
+                        </svg>
+                    </div>
+                    <div class="page_title">
+                        Tài chính
+                    </div>
+                </div>
+                <div class="nav-wrapper">
+                    @foreach (var product in currentSite.RealEstateFeatured.Take(3))
+                    {
+                        @if (product.Banner != null && product.Desc != null && product.Title != null && product.Link != null)
+                        {
+                            <div class="nav_item_menu">
+                                <div class="img_page">
+                                    <img src="@product.Banner.Media.PublicUrl.Substring(1)"
+                                         alt="" />
+                                </div>
+                                <div class="content_page bg-gray p-12 w-full">
+                                    <div class="page_title">
+                                        @product.Title
+                                    </div>
+                                    <div class="page_des">
+                                        @product.Desc
+                                    </div>
+                                    <a class="read__more" href=@Url.Content(product.Link)>
+                                        <div class="page_link">
+                                            Xem thêm
+                                            <div class="link_icon">
+                                                <svg width="8"
+                                                     height="8"
+                                                     viewBox="0 0 8 8"
+                                                     fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6.33582 2.4915L1.31507 7.51225L0.490234 6.68742L5.5104 1.66667H1.08582V0.5H7.50248V6.91667H6.33582V2.4915Z"
+                                                          fill="#000" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+
+                    <div class="footer_page d-flex">
+                        <a href="/tai-chinh#asavings"><div class="footer_title">Asavings</div></a>
+                        <a href="/tai-chinh#cashup"><div class="footer_title">Cash up</div></a>
+                        <a href="/tai-chinh#tu-van"><div class="footer_title">Tư vấn đàu tư</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page" class="page_travel">
+            <div class="header_page">
+                <div class="d-flex header_page_travel mbsc-align-center">
+                    <div onclick="goBackTravel()"
+                         class="icon_page_bds">
+                        <svg width="20"
+                             height="20"
+                             viewBox="0 0 20 20"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.5235 9.16664H16.6668V10.8333H6.5235L10.9935 15.3033L9.81516 16.4816L3.3335 9.99998L9.81516 3.51831L10.9935 4.69664L6.5235 9.16664Z"
+                                  fill="#222222" />
+                        </svg>
+                    </div>
+                    <div class="page_title">
+                        Du lịch
+                    </div>
+                </div>
+                <div class="nav-wrapper">
+                    @foreach (var product in currentSite.RealEstateFeatured.Take(3))
+                    {
+                        @if (product.Banner != null && product.Desc != null && product.Title != null && product.Link != null)
+                        {
+                            <div class="nav_item_menu">
+                                <div class="img_page">
+                                    <img src="@product.Banner.Media.PublicUrl.Substring(1)"
+                                         alt="" />
+                                </div>
+                                <div class="content_page bg-gray p-12 w-full">
+                                    <div class="page_title">
+                                        @product.Title
+                                    </div>
+                                    <div class="page_des">
+                                        @product.Desc
+                                    </div>
+                                    <a class="read__more" href=@Url.Content(product.Link)>
+                                        <div class="page_link">
+                                            Xem thêm
+                                            <div class="link_icon">
+                                                <svg width="8"
+                                                     height="8"
+                                                     viewBox="0 0 8 8"
+                                                     fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6.33582 2.4915L1.31507 7.51225L0.490234 6.68742L5.5104 1.66667H1.08582V0.5H7.50248V6.91667H6.33582V2.4915Z"
+                                                          fill="#000" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+
+                    <div class="footer_page d-flex">
+                        <a href="/du-lich#hethongkhachsan"><div class="footer_title">Hệ thống khách sạn</div></a>
+                        <a href="/du-lich#discount"><div class="footer_title">Thông tin ưu đãi</div></a>
+                        <a href="/du-lich#kinhnghiem"><div class="footer_title">Chia sẻ kinh nghiệm</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+    <div id="pc"
+         class="nav_header position-fixed top-0 left-0 right-0 z-9999 ">
+        <div class="header ">
+            
+            <a href="/">
+                <div class="logo_header">
+                    <img class="logo_img" src="/uploads/logo.jpg" />
+                </div>
+            </a>
+            <div class="list_header">
+                <div class="menu_header">
+                    <div onclick="closeMenu()" class="close_icon">
+                        <svg width="24"
+                             height="24"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.9997 10.586L16.9497 5.63599L18.3637 7.04999L13.4137 12L18.3637 16.95L16.9497 18.364L11.9997 13.414L7.04974 18.364L5.63574 16.95L10.5857 12L5.63574 7.04999L7.04974 5.63599L11.9997 10.586Z"
+                                  fill="#222222" />
+                        </svg>
+                    </div>
+                    <div onclick="openMenuMobile()" class="menu_icon">
+                        <svg width="24"
+                             height="24"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z"
+                                  fill="#222222" />
+                        </svg>
+                    </div>
+                </div>
+                <ul class="list_header_item">
+                    <li class="item @(currentUrl.Contains("gioi-thieu") ? "active" : "")">
+                        <a href="/gioi-thieu" class="item_title ">Giới thiệu</a>
+                    </li>
+                    <li class="drop_down">
+                        <div id="menu_item" class="item @(currentUrl.Contains("bat-dong-san") ? "active" : "")">
+                            <a href="/bat-dong-san" class="item_title ">Bất động sản</a>
+                            <div style="
+                          width: 25px;
+                          height: 20px;
+                          padding-top: 6.85px;
+                          padding-bottom: 6.67px;
+                          padding-left: 4.7px;
+                          padding-right: 4.7px;
+                          justify-content: center;
+                          align-items: center;
+                          display: flex;
+                        ">
+                                <svg width="20"
+                                     height="20"
+                                     viewBox="0 0 20 20"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.0001 10.9768L14.1251 6.85181L15.3034 8.03014L10.0001 13.3335L4.69678 8.03014L5.87511 6.85181L10.0001 10.9768Z"
+                                          fill="#222222" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div id="menu_navigator" class="header_navigation1">
+                            <div class="header_navigation_sub_menu">
+                                <div class="sub_menu">
+                                    @foreach(var product in currentSite.RealEstateFeatured.Take(3))
+                                    {
+                                        @if(product.Banner != null && product.Desc != null && product.Title != null && product.Link != null)
+                                        {
+                                            <div class="sub_menu_item">
+                                                <div class="sub_item">
+                                                    <div class="item_img">
+                                                        <img src="@product.Banner.Media.PublicUrl.Substring(1)" alt=""/>
+                                                        <div class="btn_play">
+                                                            <svg width="48"
+                                                                 height="48"
+                                                                 viewBox="0 0 48 48"
+                                                                 fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g id="_Play button"
+                                                                   filter="url(#filter0_b_588_16597)">
+                                                                    <path id="Button"
+                                                                          fill-rule="evenodd"
+                                                                          clip-rule="evenodd"
+                                                                          d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48ZM20.25 32.8033L33.75 25.2576C34.75 24.6987 34.75 23.3013 33.75 22.7424L20.25 15.1967C19.25 14.6378 18 15.3365 18 16.4543V31.5457C18 32.6635 19.25 33.3622 20.25 32.8033Z"
+                                                                          fill="#888888"
+                                                                          fill-opacity="1" />
+                                                                </g>
+                                                                <defs>
+                                                                    <filter id="filter0_b_588_16597"
+                                                                            x="-16"
+                                                                            y="-16"
+                                                                            width="80"
+                                                                            height="80"
+                                                                            filterUnits="userSpaceOnUse"
+                                                                            color-interpolation-filters="sRGB">
+                                                                        <feFlood flood-opacity="0"
+                                                                                 result="BackgroundImageFix" />
+                                                                        <feGaussianBlur in="BackgroundImageFix"
+                                                                                        stdDeviation="8" />
+                                                                        <feComposite in2="SourceAlpha"
+                                                                                     operator="in"
+                                                                                     result="effect1_backgroundBlur_588_16597" />
+                                                                        <feBlend mode="normal"
+                                                                                 in="SourceGraphic"
+                                                                                 in2="effect1_backgroundBlur_588_16597"
+                                                                                 result="shape" />
+                                                                    </filter>
+                                                                </defs>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item_content">
+                                                        <div class="item_content_title">
+                                                            <div class="item_title">
+                                                                @product.Title
+                                                            </div>
+                                                            <div class="item_description">
+                                                               @product.Desc
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn_read_more">
+                                                            <a class="read__more" href=@Url.Content(product.Link)>
+                                                                Xem thêm
+                                                            </a>
+                                                            <svg width="8"
+                                                                 height="8"
+                                                                 viewBox="0 0 8 8"
+                                                                 fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6.33582 2.4915L1.31507 7.51225L0.490234 6.68742L5.5104 1.66667H1.08582V0.5H7.50248V6.91667H6.33582V2.4915Z"
+                                                                      fill="#000" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="sub_content">
+                                    <a href="/bat-dong-san#_mua" data-tab="mua">
+                                        <div class="sub_content_title">Mua</div>
+                                    </a>
+                                    <a href="/bat-dong-san#_cho_thue" data-tab="cho_thue">
+                                        <div class="sub_content_title">Cho thuê</div>
+                                    </a>
+                                    <a href="/bat-dong-san#_ky_gui">
+                                        <div class="sub_content_title" data-tab="ky_gui">Ký gửi</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="drop_down">
+                        <div id="menu_item" class="item  @(currentUrl.Contains("tai-chinh") ? "active" : "")">
+                            <a href="/tai-chinh" class="item_title">Tài chính</a>
+                            <div style="
+                          width: 25px;
+                          height: 20px;
+                          padding-top: 6.85px;
+                          padding-bottom: 6.67px;
+                          padding-left: 4.7px;
+                          padding-right: 4.7px;
+                          justify-content: center;
+                          align-items: center;
+                          display: flex;
+                        ">
+                                <svg width="20"
+                                     height="20"
+                                     viewBox="0 0 20 20"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.0001 10.9768L14.1251 6.85181L15.3034 8.03014L10.0001 13.3335L4.69678 8.03014L5.87511 6.85181L10.0001 10.9768Z"
+                                          fill="#222222" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div id="menu_navigator" class="header_navigation1">
+                            <div class="header_navigation_sub_menu">
+                                <div class="sub_menu">
+                                    @foreach (var product in currentSite.FinacneFeatured.Take(3))
+                                    {
+                                        @if (product.Banner != null && product.Desc != null && product.Title != null && product.Link != null)
+                                        {
+                                            <div class="sub_menu_item">
+                                                <div class="sub_item">
+                                                    <div class="item_img">
+                                                        <img src="@product.Banner.Media.PublicUrl.Substring(1)" alt="" />
+                                                        <div class="btn_play">
+                                                            <svg width="48"
+                                                                 height="48"
+                                                                 viewBox="0 0 48 48"
+                                                                 fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g id="_Play button"
+                                                                   filter="url(#filter0_b_588_16597)">
+                                                                    <path id="Button"
+                                                                          fill-rule="evenodd"
+                                                                          clip-rule="evenodd"
+                                                                          d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48ZM20.25 32.8033L33.75 25.2576C34.75 24.6987 34.75 23.3013 33.75 22.7424L20.25 15.1967C19.25 14.6378 18 15.3365 18 16.4543V31.5457C18 32.6635 19.25 33.3622 20.25 32.8033Z"
+                                                                          fill="#888888"
+                                                                          fill-opacity="1" />
+                                                                </g>
+                                                                <defs>
+                                                                    <filter id="filter0_b_588_16597"
+                                                                            x="-16"
+                                                                            y="-16"
+                                                                            width="80"
+                                                                            height="80"
+                                                                            filterUnits="userSpaceOnUse"
+                                                                            color-interpolation-filters="sRGB">
+                                                                        <feFlood flood-opacity="0"
+                                                                                 result="BackgroundImageFix" />
+                                                                        <feGaussianBlur in="BackgroundImageFix"
+                                                                                        stdDeviation="8" />
+                                                                        <feComposite in2="SourceAlpha"
+                                                                                     operator="in"
+                                                                                     result="effect1_backgroundBlur_588_16597" />
+                                                                        <feBlend mode="normal"
+                                                                                 in="SourceGraphic"
+                                                                                 in2="effect1_backgroundBlur_588_16597"
+                                                                                 result="shape" />
+                                                                    </filter>
+                                                                </defs>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item_content">
+                                                        <div class="item_content_title">
+                                                            <div class="item_title">
+                                                                @product.Title
+                                                            </div>
+                                                            <div class="item_description">
+                                                                @product.Desc
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn_read_more">
+                                                            <a class="read__more" href=@Url.Content(product.Link)>
+                                                                Xem thêm
+                                                            </a>
+                                                            <svg width="8"
+                                                                 height="8"
+                                                                 viewBox="0 0 8 8"
+                                                                 fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6.33582 2.4915L1.31507 7.51225L0.490234 6.68742L5.5104 1.66667H1.08582V0.5H7.50248V6.91667H6.33582V2.4915Z"
+                                                                      fill="#000" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="sub_content">
+                                    <a href="/tai-chinh#asavings">
+                                        <div class="sub_content_title">Asavings</div>
+                                    </a>
+                                    <a href="/tai-chinh#cashup">
+                                        <div class="sub_content_title">Cash up</div>
+                                    </a>
+                                    <a href="/tai-chinh#tu-van">
+                                        <div class="sub_content_title">Tư vấn đầu tư</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="drop_down">
+                        <div id="menu_item" class="item  @(currentUrl.Contains("du-lich") ? "active" : "")">
+                            <a href="/du-lich" class="item_title">Du lịch </a>
+                            <div style="
+                          width: 25px;
+                          height: 20px;
+                          padding-top: 6.85px;
+                          padding-bottom: 6.67px;
+                          padding-left: 4.7px;
+                          padding-right: 4.7px;
+                          justify-content: center;
+                          align-items: center;
+                          display: flex;
+                        ">
+                                <svg width="20"
+                                     height="20"
+                                     viewBox="0 0 20 20"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.0001 10.9768L14.1251 6.85181L15.3034 8.03014L10.0001 13.3335L4.69678 8.03014L5.87511 6.85181L10.0001 10.9768Z"
+                                          fill="#222222" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div id="menu_navigator" class="header_navigation1">
+                            <div class="header_navigation_sub_menu">
+                                <div class="sub_menu">
+                                    @foreach (var product in currentSite.TravelFeatured.Take(3))
+                                    {
+                                        @if (product.Banner != null && product.Desc != null && product.Title != null && product.Link != null)
+                                        {
+                                            <div class="sub_menu_item">
+                                                <div class="sub_item">
+                                                    <div class="item_img">
+                                                        <img src="@product.Banner.Media.PublicUrl.Substring(1)" alt="" />
+                                                        <div class="btn_play">
+                                                            <svg width="48"
+                                                                 height="48"
+                                                                 viewBox="0 0 48 48"
+                                                                 fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <g id="_Play button"
+                                                                   filter="url(#filter0_b_588_16597)">
+                                                                    <path id="Button"
+                                                                          fill-rule="evenodd"
+                                                                          clip-rule="evenodd"
+                                                                          d="M24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48ZM20.25 32.8033L33.75 25.2576C34.75 24.6987 34.75 23.3013 33.75 22.7424L20.25 15.1967C19.25 14.6378 18 15.3365 18 16.4543V31.5457C18 32.6635 19.25 33.3622 20.25 32.8033Z"
+                                                                          fill="#888888"
+                                                                          fill-opacity="1" />
+                                                                </g>
+                                                                <defs>
+                                                                    <filter id="filter0_b_588_16597"
+                                                                            x="-16"
+                                                                            y="-16"
+                                                                            width="80"
+                                                                            height="80"
+                                                                            filterUnits="userSpaceOnUse"
+                                                                            color-interpolation-filters="sRGB">
+                                                                        <feFlood flood-opacity="0"
+                                                                                 result="BackgroundImageFix" />
+                                                                        <feGaussianBlur in="BackgroundImageFix"
+                                                                                        stdDeviation="8" />
+                                                                        <feComposite in2="SourceAlpha"
+                                                                                     operator="in"
+                                                                                     result="effect1_backgroundBlur_588_16597" />
+                                                                        <feBlend mode="normal"
+                                                                                 in="SourceGraphic"
+                                                                                 in2="effect1_backgroundBlur_588_16597"
+                                                                                 result="shape" />
+                                                                    </filter>
+                                                                </defs>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item_content">
+                                                        <div class="item_content_title">
+                                                            <div class="item_title">
+                                                                @product.Title
+                                                            </div>
+                                                            <div class="item_description">
+                                                                @product.Desc
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn_read_more">
+                                                            <a class="read__more" href=@Url.Content(product.Link)>
+                                                                Xem thêm
+                                                            </a>
+                                                            <svg width="8"
+                                                                 height="8"
+                                                                 viewBox="0 0 8 8"
+                                                                 fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6.33582 2.4915L1.31507 7.51225L0.490234 6.68742L5.5104 1.66667H1.08582V0.5H7.50248V6.91667H6.33582V2.4915Z"
+                                                                      fill="#000" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="sub_content">
+                                    <a href="/du-lich#hethongkhachsan">
+                                        <div class="sub_content_title">Hệ thống khách sạn</div>
+                                    </a>
+                                    <a href="/du-lich#discount">
+                                        <div class="sub_content_title">Thông tin ưu đãi</div>
+                                    </a>
+                                    <a href="/du-lich#kinhnghiem">
+                                        <div class="sub_content_title">Chia sẻ kinh nghiệm</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item @(currentUrl.Contains("newspage") ? "active" : "")">
+                        <a href="/tin-tuc" class="item_title ">Tin tức và kiến thức</a>
+                    </li>
+                    <li class="item @(currentUrl.Contains("lien-he") ? "active" : "")">
+                        <a href="/lien-he" class="item_title">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

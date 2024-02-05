@@ -1,0 +1,104 @@
+@{
+    var version = Piranha.Utils.GetAssemblyVersion(typeof(Piranha.App).Assembly);
+    version = version.Substring(0, version.LastIndexOf("."));
+}
+<!doctype html>
+<html lang="en">
+<head>
+    @if (Model is Piranha.Models.IMeta)
+    {
+        <partial name="Partial/_Meta.cshtml" />
+    }
+    <title>@ViewData["Title"]</title>
+    <link rel="icon"
+          type="image/png"
+          href="~/assets/img/favicon_logo.jpg">
+    <!-- reset css -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Raleway:wght@700&display=swap">
+    @* <link rel="stylesheet" href="~/assets/css/style.min.css" asp-append-version="true"> *@
+    <!-- Setup CSS -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Raleway:wght@700&display=swap" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Montserrat:300,400" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
+    <!-- Ajax -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  
+    
+    <!-- custom css -->    
+    <link rel="stylesheet" href="~/assets/css/ngoc.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/common.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/huy.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/Huy_fix.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/Ngoc_fix.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/datepicker.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/dropdown.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/responsiveHuy.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/responsive.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/fixbug.css" asp-append-version="true" />
+
+    @RenderSection("head", required: false)
+</head>
+
+<body>
+
+    <partial name="Partial/_Header.cshtml" />
+    <main id="main_page">
+        @RenderBody()
+    </main>
+    <partial name="Partial/_Social.cshtml" />
+    <footer id="footer">
+        <partial name="Partial/_Footer.cshtml" />
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- scroll animation -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="~/assets/js/tabs.js"></script>
+    <script src="~/assets/js/ngoc.js"></script>
+    <script src="~/assets/js/huy.js"></script>
+    @* <script src="~/assets/js/common.js"></script> *@
+    <script src="~/assets/mobiscroll/js/mobiscroll.javascript.min.js"></script>
+    <script src="~/assets/js/pagination.js"></script>
+    <script src="~/assets/js/date_range_picker.js"></script>
+    <script src="~/assets/js/loading.js"></script>
+    <script src="~/assets/js/form_submit.js"></script>
+    <script src="~/assets/js/dropdown.js"></script>
+    <!-- Date Range Picker JS-->
+   <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/assets/js/form_submit_jobs.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+﻿@model web_ttkd.Models.NewsPage
+@{
+    ViewBag.Title = Model.Title;
+    var currentSite = await WebApp.Site.GetContentAsync<DemoSite>();
+    Func<string> BlogLink = () =>
+    {
+        return Model.Permalink
+            + (Model.Archive.Category != null ? $"/category/{Model.Archive.Category.Slug}" : "")
+            + (Model.Archive.Year.HasValue ? $"/{Model.Archive.Year}" : "")
+            + (Model.Archive.Month.HasValue ? $"/{Model.Archive.Month}" : "");
+    };
+    <!-- Bài viết nổi bât -->
+    Func<IEnumerable<Piranha.Extend.Fields.PostField>> LatestPosts = () =>
+    {
+        if (Model.FeaturedNews != null && Model.FeaturedNews.Any())
+        {
+            var latestPosts = Model.FeaturedNews
+                .OfType<Piranha.Extend.Fields.PostField>()
+                .OrderByDescending(postField => postField.Post.Published)
+                .Take(3);
+
+            return latestPosts;
+        }
+        return Enumerable.Empty<Piranha.Extend.Fields.PostField>();
+    };
+    var threeLatestPosts = LatestPosts().Take(3);
+    var featuredPosts = LatestPosts();
+}
+<div class="news-wrapper">
+    <div class="container_news">
+
+        <div class="bg-gray">
+        <div class=" max-width px-80">
+        <div class="px_mobile py_mobile">
+            <div class="center_news pt-80">        
+                <div class="news_title">
+                    TIN TỨC VÀ KIẾN THỨC
+                </div>
+                <div class="input_search ">
+                    <input type="text"
+                           id="search_mbc"
+                           placeholder="Tìm kiếm tên, tác giả,..." />
+
+                    <div id="search_icon" class="pointer ">
+                        <svg width="32"
+                             height="32"
+                             viewBox="0 0 32 32"
+                             fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.668 2.66675C21.292 2.66675 26.668 8.04275 26.668 14.6667C26.668 21.2907 21.292 26.6667 14.668 26.6667C8.04397 26.6667 2.66797 21.2907 2.66797 14.6667C2.66797 8.04275 8.04397 2.66675 14.668 2.66675ZM14.668 24.0001C19.824 24.0001 24.0013 19.8227 24.0013 14.6667C24.0013 9.50941 19.824 5.33341 14.668 5.33341C9.51064 5.33341 5.33464 9.50941 5.33464 14.6667C5.33464 19.8227 9.51064 24.0001 14.668 24.0001ZM25.9813 24.0947L29.7533 27.8654L27.8666 29.7521L24.096 25.9801L25.9813 24.0947Z"
+                                  fill="black" />
+                        </svg>
+                    </div>
+                </div>           
+            </div>
+            <div class="featured_news pb-80 mt-48">
+            
+                <div class="swiper" id="swiper_position_12">
+                    <div class="swiper-wrapper">
+
+                            @foreach (var postField in @Model.SlidePost)
+                            {
+                                <div class="swiper-slide">
+                                    <div class="news_apec">
+                                        <div class="news_des">
+                                            <div class="news_content">
+                                                <div class="new_content_title uppercase underline-hover">
+                                                    @postField.Post.Category.Title
+                                                </div>
+                                                <a href="@postField.Post.Permalink">
+                                                <div class="new_main_content underline-hover">
+                                                    @postField.Post.Title
+                                                </div>
+                                                </a>
+                                                <div class="news_At">
+                                                    @postField.Post.Published.ToString()
+                                                </div>
+                                            </div>
+                                            <div class="news_btn mt-2 mt-md-4">
+                                                <a href="@postField.Post.Permalink">
+                                                    <div class="btn_read_news">
+                                                        <div>Đọc bài</div>
+                                                        <div class="d-flex">
+                                                            <svg width="24"
+                                                                 height="24"
+                                                                 viewBox="0 0 16 16"
+                                                                 fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M10.7826 7.33312L7.20663 3.75712L8.1493 2.81445L13.3346 7.99979L8.1493 13.1851L7.20663 12.2425L10.7826 8.66645H2.66797V7.33312H10.7826Z"
+                                                                      fill="#fff" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="news_picture ">
+                                            @if (postField.Post.PrimaryImage != null && postField.Post.PrimaryImage.Media != null && postField.Post.PrimaryImage.Media.PublicUrl != null)
+                                            {
+                                                <a href="@postField.Post.Permalink">
+                                                    <img loading="lazy" class="w-100 h-100 object-cover" src="@postField.Post.PrimaryImage.Media.PublicUrl.Substring(1)" alt="@postField.Post.PrimaryImage.Media.PublicUrl.Substring(1)" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <img loading="lazy" class="w-100 h-100 object-cover" src="" alt="" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                </div>
+                </div>
+                    
+                <div class="btn_news_next mobile">
+                    <div class="btn_news">
+                        <div id="btn_23" class="btn-left mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+                            </svg>
+                        </div>
+                        <div id="btn_24" class="btn-right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            </div>
+            </div>
+        </div>
+
+        <!--Bài viết nổi bật-->
+        <section class="px-80">
+        <div class="px_mobile py_mobile">
+        <div class="center_recruit ">
+         
+           
+            <div class="recruit_title ">
+                    BÀI VIẾT NỔI BẬT
+            </div>
+            <div class="btn_news_next">
+                    <div class="btn_news">
+                        <div id="btn_27" class="btn-left ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M5.2185 7.33312H13.3332V8.66645H5.2185L8.7945 12.2425L7.85184 13.1851L2.6665 7.99979L7.85184 2.81445L8.7945 3.75712L5.2185 7.33312Z" fill="black" />
+                            </svg>
+                        </div>
+                        <div id="btn_28" class="btn-right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M10.7812 7.33312L7.20517 3.75712L8.14784 2.81445L13.3332 7.99979L8.14784 13.1851L7.20517 12.2425L10.7812 8.66645H2.6665V7.33312H10.7812Z" fill="black" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+               
+        </div>
+        <div>
+            <div class="row gap-10">
+                <div class="col-sm-8 ">
+                
+                        <div class="swiper " id="swiper_position_14">
+                        <div class="swiper-wrapper">
+                            @for (int i = 0; i < @Model.FeaturedNews.Count; i += 3)
+                            {                              
+                                <div class="swiper-slide ">
+                                    @for (int j = i; j < i + 3 && j < @Model.FeaturedNews.Count; j++)
+                                    {
+                                        var currentPost = @Model.FeaturedNews[j];
+                                        <div class="row gap-10 news-card">
+                                            <div class="col-sm-4 p-0">
+                                                @if (currentPost.Post.PrimaryImage != null && currentPost.Post.PrimaryImage.Media != null && currentPost.Post.PrimaryImage.Media.PublicUrl != null)
+                                                {
+                                                    <a href="@currentPost.Post.Permalink">
+                                                        <img loading="lazy" class="w-100 h-100 object-cover" style="max-height: 200px;" src="@currentPost.Post.PrimaryImage.Media.PublicUrl.Substring(1)" alt="@currentPost.Post.PrimaryImage.Media.PublicUrl.Substring(1)" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <img loading="lazy" class="w-100 h-100 object-cover" src="" alt="" />
+                                                }
+                                            </div>
+
+                                            <!-- Cột chiếm 2/3 (8/12) -->
+                                            <div class="col-sm-8 ">
+                                                <div class="p-3 px-md-4 py-md-3 pl-0">
+                                                        <p class="body2_semi color_orange uppercase underline-hover mb-2 mb-md-4">@currentPost.Post.Category.Title</p>
+                                                    <a href="@currentPost.Post.Permalink">
+                                                            <p class="heading_3_bold color_teal-dark text-sm_truncate short-paragraph underline-hover mb-2 mb-md-4">
+                                                            @currentPost.Post.Title
+                                                        </p>
+                                                    </a>
+                                                        <p class="body2 color_gray-6">@currentPost.Post.Published.Value.ToString("yyyy-MM-dd")</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                            <div id="overlay" class="overlay"></div>
+                            <div id="loading" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                <div class="col-sm-4 ">
+                <form id="form_newpages">
+               
+                    <div  class="container_submit d-flex flex-column gap-24">
+                            <div class="d-none d-md-block">
+                                <svg class="vector24" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M20 0H0V20H20V0Z" fill="#FB7D54" style="opacity:0.2" />
+                                </svg>
+                                <svg class="vector25" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                    <path d="M30 0H0V30H30V0Z" fill="#FB7D54" style="opacity:0.2" />
+                                </svg>
+                                <svg class="vector26" xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58" fill="none">
+                                    <path d="M58 3.8147e-06H0V58H58V3.8147e-06Z" fill="#FB7D54" style="opacity:0.2" />
+                                </svg>
+                                <svg class="vector27" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
+                                    <path d="M0 0H70V70H0V0Z" fill="#FB7D54" style="opacity:0.2" />
+                                </svg>
+                            </div>
+                        <div class="d-flex flex-column gap-12">
+                            <h5>
+                                Nhận thông tin mới nhất từ Apec
+                                Trung tâm Kinh doanh
+                            </h5>
+                            <div>
+                                Cập nhật thông tin sự kiện, xu
+                                hướng và kiến thức sản phẩm số qua
+                                email của chúng tôi
+                            </div>
+                        </div>
+                        <div  class="d-flex flex-column gap-24">
+                        <div>
+                            <input class="input_submit_news"
+                                   type="text"
+                                   id="ho_ten"
+                                   placeholder="Họ và tên *" />
+                            <p id="error_name" class="none color-red text-error mt-2"> Vui lòng nhập TÊN để nhận tư vấn</p>
+                                </div>
+                                <div>
+                            <input class="input_submit_news"
+                                   type="text"
+                                   id="email_newpages"
+                                   placeholder="Email *" />
+                            <p id="error_emailnewpages" class="none color-red text-error mt-2">Vui lòng nhập địa chỉ EMAIL hợp lệ</p>
+                                </div>
+                            </div>
+                        <div >
+                            <button class="btn_submit_news"
+                                    type="submit"
+                                    >
+                                Gửi
+                            </button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <span style="display:none" id="mailReceiver">@currentSite.MailReceiver</span>
+            </div>
+                </div>
+        </div>
+        </section>
+        <!--Bài viết phổ biến-->
+    <section class="px-80 pt-80">
+            <div class="px_mobile ">
+       
+            <div class="header_recruit d-flex   line">
+      
+                <div class="recruit_title mr-5" >
+                    BÀI VIẾT PHỔ BIẾN
+                </div>
+
+                 <!--pc-->
+                    <div class=" filter_location ml-5" style="width:50%">
+                <div class="d-none d-md-block"  >
+                         
+                            <div class="swiper mySwiper_pc_menu">
+                                
+                                <div class="swiper-wrapper w-full">
+                                    <button class="filter_button location_item active location_name mr-2" data-category="all">
+                                        <span class="category-name">Tất cả</span>
+                                        
+                                        <span class="post-count"></span>
+                                    </button>
+                                   
+                                    @foreach (var category in Model.Archive.Posts.Select(post => post.Category.Title).Distinct())
+                                    {
+                                       /* var postsInCategory = Model.Archive.Posts.Where(post => post.Category.Title == category).ToList();
+
+                                        if (postsInCategory.Any())
+                                        {*/
+                                            <div class="swiper-slide ">
+
+                                                <button class="filter_button location_item location_name" data-category="@category.ToLower()" style="width:160px">
+                                                    <span class="category-name">@category</span>
+                                                    <span class="post-count"></span>
+                                                </button>
+                                            </div>
+                                        /* }*/
+                                    }
+                                </div>
+                            </div>
+              </div>
+              </div>
+                     
+                <!--mobile-->
+                <div class="d-block d-md-none">                     
+                    <div class="swiper mySwiper_mobile_menu">
+                        <div class="swiper-wrapper">
+                            <button class="filter_button location_item active location_name mr-3" data-category="all">
+                                <span class="category-name">Tất cả</span>
+                                <span class="post-count"></span>
+                            </button>
+                        @foreach (var category in Model.Archive.Posts.Select(post => post.Category.Title).Distinct())
+                                    {
+                            <div class="swiper-slide">
+                                        <button style="width:130px" class="filter_button location_item location_name" data-category="@category.ToLower()">
+                                            <span class="category-name">@category</span>
+                                            <span class="post-count"></span>
+                                        </button>
+                                </div>
+                                    }
+                            </div>
+                        </div>
+                 </div>
+                </div>
+            </div>
+            <div class="row post_popular px_mobile ">
+            
+                <!-- Filtered posts will be dynamically inserted here using JavaScript -->
+               
+            
+          </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" class="pagination-container">
+            <ul class="pagination justify-content-center">
+                <!-- Pagination links will be dynamically inserted here using JavaScript -->
+            </ul>          
+        </nav>
+
+    </section>
+</div>
+</div>
+<script src="~/assets/js/header.js"></script>
+<!-- add scripts for this page -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/assets/js/newsFilter.js"></script>
+<script type="text/javascript">
+    var allPosts = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReadALot.Where(x =>x.HasValue)));
+    newsFilterFunc(allPosts);
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="~/assets/js/flatpickr.js"></script>
+<script src="~/assets/js/form_submitnew.js"></script>
